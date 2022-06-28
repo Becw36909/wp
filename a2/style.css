@@ -1,1 +1,125 @@
 /* Insert your styles here */
+
+@import url('https://fonts.googleapis.com/css2?family=Fascinate&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+/* Makes the html / webpage as tall or taller as the browser window */
+html {
+    min-height:100vh;
+  }
+
+/* Makes the body as tall or taller as the browser window, less html element's padding */
+body {
+    min-height:calc(100vh - 2 * 20px);
+  }
+
+h1, h2 {
+    font-family: "Fascinate", sans-serif;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    text-align: initial;
+    color:#ffe;
+    background-color: #03071A;
+}
+
+header {
+    font-size: 300%;
+  }
+
+header,
+#topnav,
+main,
+footer,
+section,
+div
+{
+  margin: 5px;
+  padding: 5px;
+  box-sizing: border-box;
+  border: 5px solid grey;
+}
+
+img {
+    /* get rid of the :left and make it either start or end to keep the internationalism */
+    float: left;
+    /*object-fit: contain;*/
+    width:50%;
+    height: 50%;
+    object-fit:cover;
+    margin: 25px 10px;
+}
+
+/* this is likely no suitable - might be better for inline-block or look at a better layout manager */
+/* overflow: auto needs to go into the parent element */
+/* an empty div can also stop a footer from rising up to cause a problem with below*/
+
+
+div { 
+    overflow: auto
+}
+
+/* navigation styling ideas */
+/* this will style elements in the <nav> tags */
+  /* NAVIGATION */
+
+/* ADD STICKY FOR THE SCROLLING NAV, CHECK MARGIN AND PADDING IF USING ABSOLUTE AND FIXED STYLES */
+/* make z-index: higher than the rest eg 0 is the default;*/
+
+
+nav#topnav {
+    font-family: "Roboto", sans-serif;
+    list-style-type: none;
+    text-align: center;
+    background-color: #5C0438;
+    font-size: 25px;
+
+    margin: 0;
+    padding: 0;
+}
+
+
+/* non-interactive link */
+nav#topnav a:link,
+a:visited {
+    background-color: #03071A;
+    color: #ffe;
+    padding: 14px 25px;
+    text-decoration: none;
+    /* see if the below might be better in the nav#topnav (above) */
+    display: inline-block;
+
+}
+
+/* interactive/focused link */
+nav#topnav a:hover,
+nav a:active,
+nav a:focus {
+    color: #59A3E3;
+}
+
+table {
+    border-collapse: collapse;
+    width:50%;
+/* try */
+/* display:inline-table; */
+
+
+}
+
+table, th, td {
+    border:1px solid #ddd;
+    padding: 8px;
+  }
+
+table th {
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #5C0438;
+  }
+
+  table tr:hover {
+    background-color: #59A3E3; 
+  }
