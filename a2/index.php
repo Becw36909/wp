@@ -29,17 +29,20 @@
     <a href="#AboutUs">About Us</a>
     <a href="#SeatingAndPrices">Seating and Prices</a>
     <a href="#NowShowing">Now Showing</a>
-    
+    <a href="booking.php">TEMP BOOKING LINK</a>
   </nav>
 
   <main>
     <section>
-    <div>
-      <h2 id="AboutUs">About Us</h2>
-      <div><img src='../../media/dolbycinema.png' alt='An audience in a movie cinema with Dolby picture and sound' /></div>    
+    <div id="AboutUs"></div>
+    <div><h2>About Us</h2></div>
+    <div class="flex-container">
 
+ 
+    <img src='../../media/dolbycinema.png' alt='An audience in a movie cinema with Dolby picture and sound' />    
+
+     <ul>
       <p>Lunardo Cinema welcomes our customers back to our newly renovated and refurbished cinema, after extensive improvements made to our cinema experience including the following:</p>
-      <ul>
         <li>Brand new seats for our standard sessions and reclinable first class seats are now available for your viewing comfort.</li>
         <li>New projection and sound systems have been installed and upgraded with 3D Dolby Vision projection and Dolby Atmos sound.</li>
         <li>Dolby Vision unlocks the emotional impact of every film, allowing you to see the subtle details and ultravivid colors.</li>
@@ -48,12 +51,18 @@
 
       </ul>
     </div>
+</div>
 
     </section>
 
     <section>
+    <div id="SeatingAndPrices"></div>
+    <div><h2>Seating and Prices</h2></div>
+    <div class="flex-container">
+
+
     <div>
-      <h2 id="SeatingAndPrices">Seating and Prices</h2>
+      
       <img src='../../media/Profern-Standard-Twin.png' alt='A Standard Cinema Seat' />
       <table>
         <tr>
@@ -104,14 +113,30 @@
         </tr>
       </table>
       </div>
+      </div>
     </section>
 
     <section>
-    <div>
+    <div id="NowShowing"></div>
+      <div><h2>Now Showing</h2></div>
+      <div class="card3D">
+      <div>FRONT</div>
+      <div>BACK <form action="booking.php" method='get'>
+      <input type ="hidden" name="movie" value="ACT">
+  <input type="submit" value="Book Now">
+</form>
 
-      <h2 id="NowShowing">Now Showing</h2>
-      <p></p>
+<p><a href="booking.php">TEMP BOOKING LINK</a></p></div>
+      </div>
+    <div class="flex-container">
+ 
+  
+
+
+      
+      <p>I am in a flex container under the flip cards - but I need to check that I am referencing the flex containers properly</p>
     </div>
+    
     </section>
     
 
