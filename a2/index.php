@@ -21,7 +21,7 @@
 <body>
 
   <header>
-    <div><h1>Put company logo and name here - LUNARDO Cinema</h1></div>
+    <div><h1>LUNARDO Cinema &#x2606</h1></div>
   </header>
 
   <nav id="topnav">
@@ -29,12 +29,11 @@
     <a href="#AboutUs">About Us</a>
     <a href="#SeatingAndPrices">Seating and Prices</a>
     <a href="#NowShowing">Now Showing</a>
-    <a href="booking.php">TEMP BOOKING LINK</a>
   </nav>
 
   <main>
-    <section>
-    <div id="AboutUs"></div>
+  <section id="AboutUs">
+    <div></div>
     <div><h2>About Us</h2></div>
     <div class="flex-container">
 
@@ -55,8 +54,8 @@
 
     </section>
 
-    <section>
-    <div id="SeatingAndPrices"></div>
+    <section id="SeatingAndPrices">
+    <div ></div>
     <div><h2>Seating and Prices</h2></div>
     <div class="flex-container">
 
@@ -116,26 +115,104 @@
       </div>
     </section>
 
-    <section>
-    <div id="NowShowing"></div>
+    <section id="NowShowing">
+    <div ></div>
+  
       <div><h2>Now Showing</h2></div>
+
       <div class="card3D">
       <div>FRONT</div>
       <div>BACK <form action="booking.php" method='get'>
       <input type ="hidden" name="movie" value="ACT">
   <input type="submit" value="Book Now">
 </form>
-
-<p><a href="booking.php">TEMP BOOKING LINK</a></p></div>
+</div>
       </div>
-    <div class="flex-container">
- 
+
+      <div class="card3D" id="topgun">
+      <div><h3>TOP GUN (M)</h3><img src="../../media/topgun.png" alt="A Top Gun movie poster featuring the Actor Tom Cruise 
+      in front of a plane"/></div>
+      <div><h3>TOP GUN (M)</h3>
+      <ul>
+      <p>After more than thirty years of service as one of the Navy's top aviators, Pete Mitchell is where he belongs, pushing 
+        the envelope as a courageous test pilot and dodging the advancement in rank that would ground</p>
+        <li>Session Times:</li>
+        <li>Monday: 9pm</li>
+        <li>Tuesday: 9pm</li>
+        <li>Wednesday: 9pm</li>
+        <li>Friday: 9pm</li>
+        <li>Saturday: 6pm</li>
+        <li>Sunday: 6pm</li>
+
+      </ul><form action="booking.php" method='get'>
+      <input type ="hidden" name="movie" value="ACT">
+  <input type="submit" value="Book Now">
+</form>
+</div></div>
+
+
+<div class="card3D" id="mrsharris">
+      <div><h3>Mrs Harris Goes to Paris (PG)</h3><img src="../../media/mrsharris.png" alt="A movie poster depicting Mrs Harris in front of a pink background"/></div>
+      <div><h3>Mrs Harris Goes to Paris (PG)</h3>
+      <ul>
+      <p>A widowed cleaning lady in 1950s London falls madly in love with a couture Dior dress, and decides that she must have one of her own.</p>
+        <li>Session Times:</li>
+        <li>Wednesday: 12pm</li>
+        <li>Friday: 12pm</li>
+        <li>Saturday: 3pm</li>
+        <li>Sunday: 3pm</li>
+
+      </ul><form action="booking.php" method='get'>
+      <input type ="hidden" name="movie" value="ACT">
+  <input type="submit" value="Book Now">
+</form>
+</div>
+      </div>
+
+      <div class="card3D" id="lightyear">
+      <div><h3>Lightyear (PG)</h3><img src="../../media/lightyear.png" alt="A movie poster of the toy Buzz Lightyear blasting off into space"/></div>
+      <div><h3>Lightyear (PG)</h3>
+      <ul>
+      <p>While spending years attempting to return home, marooned Space Ranger Buzz Lightyear encounters 
+        an army of ruthless robots commanded by Zurg who are attempting to steal his fuel source.</p>
+        <li>Session Times:</li>
+        <li>Monday: 12pm</li>
+        <li>Tuesday: 12pm</li>
+        <li>Wednesday: 6pm</li>
+        <li>Friday: 6pm</li>
+        <li>Saturday: 12pm</li>
+        <li>Sunday: 12pm</li>
+
+      </ul><form action="booking.php" method='get'>
+      <input type ="hidden" name="movie" value="ACT">
+  <input type="submit" value="Book Now">
+</form>
+</div>
+      </div>
+
+      <div class="card3D" id="Prithviraj">
+      <div><h3>Prithviraj (PG)</h3><img src="../../media/Prithviraj.png" alt="A movie poster of the main character Prithviraj"/></div>
+      <div><h3>Prithviraj(PG)</h3>
+      <ul>
+      <p>A fearless warrior. An epic love story. Witness the grand saga of Samrat Prithviraj Chauhan.</p>
+        <li>Session Times:</li>
+        <li>Monday: 6pm</li>
+        <li>Tuesday: 6pm</li>
+        <li>Saturday: 9pm</li>
+        <li>Sunday: 9pm</li>
+
+      </ul><form action="booking.php" method='get'>
+      <input type ="hidden" name="movie" value="ACT">
+  <input type="submit" value="Book Now">
+</form>
+</div>
+      </div>
+
+<div></div>
+
+
+
   
-
-
-      
-      <p>I am in a flex container under the flip cards - but I need to check that I am referencing the flex containers properly</p>
-    </div>
     
     </section>
     

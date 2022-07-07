@@ -1,4 +1,3 @@
-/* Insert your styles here */
 
 @import url('https://fonts.googleapis.com/css2?family=Fascinate&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
@@ -12,7 +11,11 @@ html {
 
 h1, h2 {
     font-family: "Fascinate", sans-serif;
-    display: block;
+    display: inline-block;
+}
+
+h2 {
+    font-size: 200%;
 }
 /* Makes the body as tall or taller as the browser window, less html element's padding */
 
@@ -27,6 +30,10 @@ body {
 
 header {
     font-size: 300%;
+    text-align: center;
+    /*background-image: url("../../media/curtains.png");
+    background-repeat: no-repeat;
+    background-size: 100%;*/
   }
 
 header,
@@ -42,6 +49,8 @@ div
   border: 5px solid grey;
 }
 
+
+
 img {
     
     display: inline-block;
@@ -51,6 +60,12 @@ img {
     /*object-fit:cover;*/
     margin: 25px 10px;
 }
+
+/*iframe {
+    
+    display: inline-block;
+    margin: 25px 10px;
+}*/
 
 /* this is likely no suitable - might be better for inline-block or look at a better layout manager */
 /* overflow: auto needs to go into the parent element */
@@ -67,9 +82,6 @@ img {
     /*clear: both;*/
 }
 
-/* navigation styling ideas */
-/* this will style elements in the <nav> tags */
-  /* NAVIGATION */
 
 /* ADD STICKY FOR THE SCROLLING NAV, CHECK MARGIN AND PADDING IF USING ABSOLUTE AND FIXED STYLES */
 /* make z-index: higher than the rest eg 0 is the default;*/
@@ -83,10 +95,9 @@ nav#topnav {
     font-size: 25px;
     position: sticky;
     top: 0;
-
     margin: 0;
     padding: 0;
-   
+    z-index: 1;
 }
 
 
@@ -100,7 +111,6 @@ a:visited {
     /* see if the below might be better in the nav#topnav (above) */
     display: inline-block;
     transition: 0.5s;
-
 }
 
 /* interactive/focused link */
@@ -116,7 +126,6 @@ table {
 /* try 
 display:inline-table; */ 
 display: inline-block;
-
 }
 
 table, th, td {
@@ -131,11 +140,7 @@ table th {
     background-color: #5C0438;
   }
 
-  table tr:hover {
-    background-color: #59A3E3; 
-  }
 
-  /* I don't think the anchor is working the way I want */
   #anchor {
     scroll-margin-top: 300px;
   }
@@ -149,6 +154,8 @@ table th {
     padding: 5px;
     overflow: auto;
     position: relative;
+    /*z-index: -1;*/
+    
   }
 
   div.card3D > div {
@@ -184,3 +191,15 @@ table th {
   overflow: auto;
   transform: rotateY(360deg);
   }
+
+/*  #debug pre { 
+    overflow-y: scroll; 
+}
+
+/*
+fieldset {
+    display:flex;
+    margin:40px;
+    width: fit-content;
+    border-width: 0px;
+   }*/
