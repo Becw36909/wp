@@ -27,32 +27,33 @@
     </nav>
 
     <main>
-      
+    <div>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/giXco2jaZ_4" title="YouTube video player" frameborder="0" allow="accelerometer; 
-      autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><p>this is some text</p>    
-      <div class="flex-container">
-      <ul>
-      <h3>TOP GUN: MAVERICK (RATED M)</h3>
+      autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>   
+      </div>
+      <div>
+      <h2>TOP GUN: MAVERICK (RATED M)</h2>
       <p>After more than thirty years of service as one of the Navy's top aviators, Pete “Maverick” Mitchell (Tom Cruise) is where he belongs, 
         pushing the envelope as a courageous test pilot and dodging the advancement in rank that would ground him. When he finds himself training 
         a detachment of Top Gun graduates for a specialized mission the likes of which no living pilot has ever seen, 
         Maverick encounters Lt. Bradley Bradshaw (Miles Teller), call sign: “Rooster,” the son of Maverick's late friend and 
         Radar Intercept Officer Lt. Nick Bradshaw, aka “Goose”. Facing an uncertain future and confronting the ghosts of his past, 
         Maverick is drawn into a confrontation with his own deepest fears, culminating in a mission that demands the ultimate sacrifice from 
-        those who will be chosen to fly it.</p> 
+        those who will be chosen to fly it.</p>
+        <ul> 
         <li>Director: Joseph Kosinski </li>  
         <li>Stars: Tom Cruise, Jennifer Connelly, Miles Teller</li>
         <li>Run Time: 151 mins </li>  
         </ul> </div>
       </div>
   
-
+<div>
       <form method='post'>
       <input type ="hidden" name="movie" value="ACT">
 
-
+      <h2>Session Day and Time</h2>
       <fieldset>
-    <legend><h3>Please choose Session Day and Time:</h3></legend>
+    <legend><h3>Please choose:</h3></legend>
     <input type="radio" id="Monday" name="day" value="MON" data-pricing="disc">
       <label for="Monday">Monday 9pm</label>
     <input type="radio" id="Tuesday" name="day" value="TUES" data-pricing="disc">
@@ -67,13 +68,9 @@
       <label for="Sunday">Sunday 6pm</label>
   </fieldset>
 
-    <h3>Please choose required seats:</h3>
-
-      // I don't have id's on my select dropdowns only a name is this ok<br>
-
-      STYLE DROP DOWNS
+    <h2>Required Seats:</h2>
       
-   ><h3>Standard Adult</h3>
+   <h3>Standard Adult</h3>
       <select name='seats[STA]' data-full="20.5" data-disc="15">
   <option value=''>Please Select</option>
   <option value='1'>1</option>
@@ -169,18 +166,18 @@
 </select>
 
 
-<p> STYLE the BREAKS WITH CSS AND FIX FORM BELOW WITH CSS - how to make more page spacing with CSS instead of using breaks?</p>
-  <label for="name">Full Name:</label>
+<p> <h2>Customer Details</h2></p>
+  <p><label for="name">Full Name:</label></p>
   <input type='text' id="name" name='user[name]' placeholder='First Name' required/>
-  <label for="email">Email:</label>
+  <p><label for="email">Email:</label></p>
   <input type='text' id="email" name='user[email]' placeholder='Email' required/>
-  <label for="mobile">Full Name:</label>
+  <p><label for="mobile">Full Name:</label></p>
   <input type='text' id="mobile" name='user[mobile]' placeholder='Mobile Number' required/>
 
-  <input type="submit" value="Submit">
+  <p><input type="submit" value="Submit"></p>
 </form>
 
-
+</div>
 
 
 

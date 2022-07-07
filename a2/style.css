@@ -2,6 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Fascinate&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+:root {
+  --white: #ffe;
+  --skyblue: #59A3E3;
+  --backgcolour: #03071A; 
+  --maroon:  #5C0438;
+}
+
 /* Makes the html / webpage as tall or taller as the browser window */
 html {
     min-height:100vh;
@@ -17,14 +24,14 @@ h1, h2 {
 h2 {
     font-size: 200%;
 }
-/* Makes the body as tall or taller as the browser window, less html element's padding */
 
+/* Makes the body as tall or taller as the browser window, less html element's padding */
 body {
     min-height:calc(100vh - 2 * 20px);
     font-family: "Roboto", sans-serif;
     text-align: initial;
-    color:#ffe;
-    background-color: #03071A;
+    color: var(--white);
+    background-color: var(--backgcolour);
     display: inline-block;
 }
 
@@ -50,9 +57,7 @@ div
 }
 
 
-
 img {
-    
     display: inline-block;
     object-fit: contain;
     width:50%;
@@ -86,12 +91,11 @@ img {
 /* ADD STICKY FOR THE SCROLLING NAV, CHECK MARGIN AND PADDING IF USING ABSOLUTE AND FIXED STYLES */
 /* make z-index: higher than the rest eg 0 is the default;*/
 
-
 nav#topnav {
     font-family: "Roboto", sans-serif;
     list-style-type: none;
     text-align: center;
-    background-color: #5C0438;
+    background-color: var(--maroon);
     font-size: 25px;
     position: sticky;
     top: 0;
@@ -104,20 +108,20 @@ nav#topnav {
 /* non-interactive link */
 nav#topnav a:link,
 a:visited {
-    background-color: #03071A;
-    color: #ffe;
+    background-color: var(--backgcolour);
+    color: var(--white);
     padding: 14px 25px;
     text-decoration: none;
     /* see if the below might be better in the nav#topnav (above) */
     display: inline-block;
-    transition: 0.5s;
+    transition: 0.4s;
 }
 
 /* interactive/focused link */
 nav#topnav a:hover,
 nav a:active,
 nav a:focus {
-    color: #59A3E3;
+    color: var(--skyblue);
 }
 
 table {
@@ -137,25 +141,21 @@ table th {
     font-family: Arial, Helvetica, sans-serif;
     padding-top: 12px;
     padding-bottom: 12px;
-    background-color: #5C0438;
+    background-color: var(--maroon);
   }
-
 
   #anchor {
     scroll-margin-top: 300px;
   }
 
-
   div.card3D {
-    background-color: #5C0438;
+    background-color:var(--maroon);
     /*box-sizing: border-box;*/
     height: 300px;
     width: 200px;
     padding: 5px;
     overflow: auto;
     position: relative;
-    /*z-index: -1;*/
-    
   }
 
   div.card3D > div {
@@ -171,7 +171,6 @@ table th {
 
   div.card3D > div:nth-child(1) {
     border: 4px #59A3E3;
-
     transform: rotateY(0deg);
   }
 
@@ -194,12 +193,87 @@ table th {
 
 /*  #debug pre { 
     overflow-y: scroll; 
-}
+}*/
 
-/*
+
 fieldset {
     display:flex;
-    margin:40px;
+    margin:0px;
     width: fit-content;
     border-width: 0px;
-   }*/
+   }
+
+
+   fieldset input[type="radio"] {
+    display: none;
+   }
+  
+
+   fieldset input[type="radio"] + label {
+    display: inline-block;
+    padding: 15px 25px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: var(--maroon);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    transition-duration: 0.4s;
+  }
+
+  fieldset input[type="radio"] + label:hover {background-color: var(--skyblue)}
+
+
+   fieldset input[type="radio"]:checked + label{
+    background-color: var(--skyblue);
+    color: var(--white);
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+  
+   fieldset input[type="radio"]:first-of-type + label {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+   }   
+  
+   fieldset input[type="radio"]:last-of-type + label {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+   } 
+
+   input[type=text] {
+    width: 50%;
+    padding: 8px 16px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    border: 2px solid maroon;
+    background-color: var(--white);
+    border-radius: 4px;
+  }
+
+  input[type=submit]{
+    background-color: var(--maroon);
+    border: var(--skyblue);
+    color: var(--white);
+    padding: 15px 25px;
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition-duration: 0.4s;
+  }
+
+  input[type=submit]:hover {background-color: var(--skyblue)}
+
+  select {
+    padding: 8px 8px;
+    border: var(--maroon);
+    border-radius: 4px;
+    background-color: var(--white);
+  }
