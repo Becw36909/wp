@@ -27,7 +27,8 @@ h2 {
 
 /* Makes the body as tall or taller as the browser window, less html element's padding */
 body {
-    min-height:calc(100vh - 2 * 20px);
+  margin: 0;
+  box-sizing: border-box;
     font-family: "Roboto", sans-serif;
     text-align: initial;
     color: var(--white);
@@ -38,12 +39,13 @@ body {
 header {
     font-size: 300%;
     text-align: center;
+    
     /*background-image: url("../../media/curtains.png");
     background-repeat: no-repeat;
     background-size: 100%;*/
   }
 
-header,
+/*header,
 #topnav,
 main,
 footer,
@@ -54,17 +56,26 @@ div
   padding: 5px;
   box-sizing: border-box;
   border: 5px solid grey;
-}
+}*/
 
+/* *{
+
+  box-sizing: border-box;
+  border: 5px solid grey;
+} */
 
 img {
+  max-width: 100%;
+  height: auto;
+}
+/*img {
     display: inline-block;
     object-fit: contain;
     width:50%;
     height: 50%;
-    /*object-fit:cover;*/
+    /*object-fit:cover;
     margin: 25px 10px;
-}
+}*/
 
 /*iframe {
     
@@ -81,10 +92,38 @@ img {
     overflow: auto; 
 }*/
 
-.flex-container{ 
-    display: flex;
-    /*flex-wrap: wrap;
-    /*clear: both;*/
+.flex-container-other {
+  display: flex;
+  background-color: brown;
+/* width: 90vw; */
+}
+
+/*.flex-container-other > div {
+  background-color: #f1f1f1;
+  margin: 10px;
+  padding: 20px;
+  font-size: 30px;
+}*/
+
+.flex-container {
+  display: flex;
+  background-color: DodgerBlue;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-flow: row wrap;
+}
+
+/*.flex-container > div {
+  background-color: #f1f1f1;
+  width: 45vh;
+  margin: 10px;
+  padding: 20px;
+  font-size:initial;
+}*/
+
+.flex-container > div {
+  background-color: #f1f1f1;
+  font-size:initial;
 }
 
 
@@ -132,6 +171,11 @@ display:inline-table; */
 display: inline-block;
 }
 
+table.center {
+  margin-left: auto; 
+  margin-right: auto;
+}
+
 table, th, td {
     border:1px solid #ddd;
     padding: 8px;
@@ -148,53 +192,19 @@ table th {
     scroll-margin-top: 300px;
   }
 
-  div.card3D {
-    background-color:var(--maroon);
-    /*box-sizing: border-box;*/
-    height: 300px;
-    width: 200px;
-    padding: 5px;
-    overflow: auto;
-    position: relative;
-  }
-
-  div.card3D > div {
-    height: calc(100% - 10px);
-    width: calc(100% - 10px);
-        /*box-sizing: border-box;*/
-    padding: 5px 10px;
-    position: absolute;
-    transition: 3s;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-  }
-
-  div.card3D > div:nth-child(1) {
-    border: 4px #59A3E3;
-    transform: rotateY(0deg);
-  }
-
-  div.card3D:hover > div:nth-child(1) {
-    border: 4px #59A3E3;
-    transform: rotateY(180deg);
-  }
-
-  div.card3D > div:nth-child(2) {
-    border: 4px #59A3E3;
-    transform: rotateY(180deg);
-  overflow: auto;
-  }
-
-  div.card3D:hover > div:nth-child(2) {
-    border: 4px #59A3E3;
-  overflow: auto;
-  transform: rotateY(360deg);
-  }
 
 /*  #debug pre { 
     overflow-y: scroll; 
 }*/
 
+#movie-card-container {
+  min-height: 100vh;
+  max-width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
 
 fieldset {
     display:flex;
@@ -257,7 +267,7 @@ fieldset {
 
   input[type=submit]{
     background-color: var(--maroon);
-    border: var(--skyblue);
+    border: 5px solid var(--white);
     color: var(--white);
     padding: 15px 25px;
     font-weight: bold;
@@ -277,3 +287,108 @@ fieldset {
     border-radius: 4px;
     background-color: var(--white);
   }
+
+  #NowShowing, #AboutUs, #SeatingAndPrices {
+    min-height: 100vh;
+    max-width: 100vw;
+    padding-top: 8vh;
+  }
+
+/* #AboutUs img {
+  width: 80vw;
+} */
+
+  .movie-poster {
+    display: flex;
+    align-items: center;
+    min-height: 40vh;
+    width: 40%;
+  }
+
+  .movie-name {
+    display: flex;
+    width: 50%;
+    min-height: 40vh;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .front-panel {
+    display: flex;
+    align-items: center;
+  }
+
+  .back-panel {
+    display: flex;
+  }
+
+  .movie-blurb {
+    min-height: 40vh;
+    width: 40%;
+  }
+
+  .movie-times {
+    width: 50%;
+    min-height: 40vh;
+  }
+
+
+  .flip-card {
+    background-color: transparent;
+    box-shadow: 0px 0px 10px 5px lightgrey;
+    border-radius: 10px;
+    display: flex;
+    width: 40vw;
+    min-height: 40vh;
+    margin: 5vh 0;
+    perspective: 1000px;
+  }
+  
+  .flip-card-inner {
+    display: flex;
+    position: relative;
+    width: 100%;
+    min-height: 40vh;
+    text-align: center;
+    transition: transform 3s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  }
+  
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .flip-card-front, .flip-card-back {
+    background-color: var(--maroon);
+    position: absolute;
+    width: 100%;
+    min-height: 40vh;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  .flip-card-front {
+    background-color: var(--maroon);
+    color: var(--white);
+  }
+  
+  .flip-card-back {
+    background-color: var(--maroon);
+    color: var(--white);
+    transform: rotateY(180deg);
+  }
+
+
+@media screen and (max-width: 991px) {
+  .flip-card {
+    width: 65vw;
+    min-height: 40vh;
+  }
+  
+}
+
+@media screen and (max-width: 767px) {
+  
+}
