@@ -94,8 +94,8 @@ function phoneNumberCheck() {
       console.log(sections[2].offsetTop+' '+(sections[2].offsetTop+sections[2].offsetHeight));
 
       for (var a=0; a<sections.length; a++) {
-        var secTop = sections[a].offsetTop-1;
-        var secBot = sections[a].offsetTop + sections[a].offsetHeight-1;
+        var secTop = sections[a].offsetTop-20;
+        var secBot = sections[a].offsetTop + sections[a].offsetHeight-20;
         console.log(secTop+' '+secBot);
         if (window.scrollY >= secTop && window.scrollY < secBot) {
           console.log(sections[a].id+': current');
