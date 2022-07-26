@@ -61,20 +61,9 @@
         </div>
       </div>
 
-      <div>
-      <h4>Hey, click on the button below to invoke the function</h4>
-      <input type= "button" onclick = "linkThis()" value = "Click Me">
-    
-      <p id="inner" onclick="innerChange()">Click me to change my HTML content (innerHTML).</p>
 
-    </div>
-      <button onclick="alertBox()">Try it</button>
+      <div id="form">
 
-
-
-
-
-      <div>
         <form name="bookingForm" method="post" oninput="return logDetails()" onsubmit="return formValidate();">
 
           <input type="hidden" name="movie" value="ACT">
@@ -206,13 +195,11 @@
           <p><label for="email">Email:</label></p>
           <input type="email" id="email" name="user[email]" placeholder="Email" required /> 
           <p><label for="mobile">Mobile Number:</label></p>
-          <!-- <input type="text" id="mobile" name="user[mobile]" placeholder="Mobile Number" required onchange="phoneNumberCheck()"/><p id="demo3"></p> -->
-          <input type="text" id="mobile" name="user[mobile]" placeholder="Mobile Number" required pattern= "(\(04\)|04|\+614)( ?\d){8}"/>
+          <input type="text" id="mobile" name="user[mobile]" placeholder="Mobile Number" required onchange="phoneNumberCheck()"/><p id="demo3"></p>
+          <!-- <input type="text" id="mobile" name="user[mobile]" placeholder="Mobile Number" required pattern= "(\(04\)|04|\+614)( ?\d){8}"/> -->
           <p><input type="submit" value="Submit"></p>
 
         </form>
-
-      </div>
 
       </div>
     </section>

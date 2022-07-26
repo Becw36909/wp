@@ -54,6 +54,21 @@ header {
   background-color: var(--maroon);
 }
 
+footer {
+  background-color: var(--skyblue);
+  color: black;
+  text-align: initial;
+  box-sizing: border-box;
+  text-align: center;
+  padding-top: 4vh;
+  padding-bottom: 4vh;
+}
+
+#form {
+  padding-left: 2vh;
+  padding-bottom: 4vh;
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -63,7 +78,6 @@ img {
   display: flex;
   padding: 25px 25px;
   background-color: var(--backgcolour);
-
   font-size: 20px;
   justify-content: space-evenly;
   align-items: center;
@@ -150,6 +164,7 @@ table th {
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
+  padding-top: 4vh ;
 }
 
 fieldset {
@@ -254,6 +269,16 @@ select {
   padding-top: 4vh;
 }
 
+#NowShowing {
+  padding-bottom: 10vh;
+}
+
+.front-panel {
+  display: flex;
+  box-shadow: 0px 0px 10px 5px lightgrey;
+  border-radius: 10px;
+  align-items: center;
+}
 .movie-poster {
   display: flex;
   align-items: center;
@@ -267,13 +292,6 @@ select {
   width: 50%;
   min-height: 40vh;
   justify-content: center;
-  align-items: center;
-}
-
-.front-panel {
-  display: flex;
-  box-shadow: 0px 0px 10px 5px lightgrey;
-  border-radius: 10px;
   align-items: center;
 }
 
@@ -328,6 +346,7 @@ select {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
+
 
 .flip-card-front {
   background-color: var(--maroon);

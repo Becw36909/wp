@@ -33,10 +33,9 @@ function nameCheck() {
 }
 
 function phoneNumberCheck() {
-  const phRegex = new RegExp(/^(\(04\)|04|\+614)( ?\d){8}$/);
+  const phRegex = new RegExp(/^(\(04\)|04|\+614)( ?\d){8}$/); 
   document.getElementById("demo3").innerHTML = "Number being checked ";
-  var name=getid("mobile").value;
-  
+  var mobile=getid("mobile").value;
   if (phRegex.test(mobile))
   {
     alert("Valid number!");
@@ -118,27 +117,12 @@ if (formTotal > 0){
           // console.log(seat.dataset[priceCode])
           var subtotal = seat.value * seat.dataset[priceCode];
           total += subtotal; 
-
           var totalformatted = total.toFixed(2);
         }
-
         formTotal = total;
-        total > 0 ? document.getElementById('price').innerHTML = "$ " +totalformatted : document.getElementById('price').innerHTML = "nothing";
-        // if (total > 0){
-        //   document.getElementById('price').innerHTML = totalformatted;
-        // }
-        // else {
-        // }
-       
+        total > 0 ? document.getElementById('price').innerHTML = "$ " +totalformatted : document.getElementById('price').innerHTML = " ";
         console.log(total);
-      
         return (total > 0);
-        // if (total > 0){
-        //   return true;
-        // }
-        // else {
-        //   return false;
-        // }
         
       }
 
