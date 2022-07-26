@@ -1,8 +1,8 @@
 /* Insert your javascript here */
 
+var formTotal; 
 
 function linkThis() {
-     
 document.write("You are learning how to call JavaScript function in html");
 }
 
@@ -58,41 +58,35 @@ function phoneNumberCheck() {
   }
 
 
-
-// This is where it all happens!
-  // function formValidate() {
-  // // clear all errors, even if it's the first run
-  //   clearErrors();
-  //   var countErrors=0;
-  // // Is their first name 'Steve'
-  //   if (!nameCheck()) countErrors++;
-  // // Are they a scientist?
-  //   if (!scientistCheck()) countErrors++;
-  // // Is the filename in format xxxxx.pdf?
-  //   if (!fileNameCheck()) countErrors++;
-  // // Block or allow submission depending on number of errors
-  //   console.log(countErrors);
-  //   return (countErrors==0);
-  // }
-  
   // This is where it all happens!
   function formValidate() {
+    //clearErrors();
+    alert("You pressed submit");
+  var countErrors=0;
+  // if (total > 0){
+  //   return true;
+  // }
+  // else {
+  //   alert("You need to choose seat/s");
+  //   console.log("no seats checked");
+  //   return false;
+if (formTotal > 0){
+  return true;
+}
+  else {
+    alert("You need to choose seat numbers and day of the week");
+    return false;
+    
 
-      // alertBox();
-    }
-
-    // window.onscroll = function () 
+  }
+}
+    
     function currentLinks() {
       console.clear();
       console.log("Win Y: "+window.scrollY);
       var navlinks = document.getElementsByTagName("nav")[0].getElementsByTagName('a');
       console.log(navlinks);
       var sections = document.getElementsByTagName("main")[0].getElementsByTagName("section");
-      console.log(sections);
-      console.log(sections[0].offsetTop+' '+(sections[0].offsetTop+sections[0].offsetHeight));
-      console.log(sections[1].offsetTop+' '+(sections[1].offsetTop+sections[1].offsetHeight));
-      console.log(sections[2].offsetTop+' '+(sections[2].offsetTop+sections[2].offsetHeight));
-
       for (var a=0; a<sections.length; a++) {
         var secTop = sections[a].offsetTop-20;
         var secBot = sections[a].offsetTop + sections[a].offsetHeight-20;
@@ -107,4 +101,45 @@ function phoneNumberCheck() {
 
         }
       } 
+
+      function logDetails() {
+        console.clear();
+        console.log("enter logDetails()");
+        
+        var total = 0;  
+        var daySelected = document.querySelector("input[name='day']:checked");
+        var priceCode = daySelected.dataset['pricing'];
+        console.log(daySelected); 
+        console.log(priceCode); 
+        var seatsqtys = document.querySelectorAll(".seat-select");
+        console.log(seatsqtys); 
+
+        for (seat of seatsqtys) {
+          // console.log(seat.dataset[priceCode])
+          var subtotal = seat.value * seat.dataset[priceCode];
+          total += subtotal; 
+
+          var totalformatted = total.toFixed(2);
+        }
+
+        formTotal = total;
+        total > 0 ? document.getElementById('price').innerHTML = "$ " +totalformatted : document.getElementById('price').innerHTML = "nothing";
+        // if (total > 0){
+        //   document.getElementById('price').innerHTML = totalformatted;
+        // }
+        // else {
+        // }
+       
+        console.log(total);
+      
+        return (total > 0);
+        // if (total > 0){
+        //   return true;
+        // }
+        // else {
+        //   return false;
+        // }
+        
+      }
+
     

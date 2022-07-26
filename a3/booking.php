@@ -75,7 +75,8 @@
 
 
       <div>
-        <form name="bookingForm" method="post" onsubmit="return formValidate();">
+        <form name="bookingForm" method="post" oninput="return logDetails()" onsubmit="return formValidate();">
+
           <input type="hidden" name="movie" value="ACT">
 
           <h2>Session Day and Time</h2>
@@ -83,24 +84,24 @@
             <legend>
               <h3>Please choose:</h3>
             </legend>
-            <input type="radio" id="Monday" name="day" value="MON" data-pricing="disc">
+            <input type="radio" id="Monday" name="day" value="MON" data-pricing="discprice">
             <label for="Monday">Monday 9pm</label>
-            <input type="radio" id="Tuesday" name="day" value="TUES" data-pricing="disc">
+            <input type="radio" id="Tuesday" name="day" value="TUES" data-pricing="discprice">
             <label for="Tuesday">Tuesday 9pm</label>
-            <input type="radio" id="Wednesday" name="day" value="WED" data-pricing="disc">
+            <input type="radio" id="Wednesday" name="day" value="WED" data-pricing="discprice">
             <label for="Wednesday">Wednesday 9pm</label>
-            <input type="radio" id="Friday" name="day" value="FRI" data-pricing="disc">
+            <input type="radio" id="Friday" name="day" value="FRI" data-pricing="discprice">
             <label for="Friday">Friday 9pm</label>
-            <input type="radio" id="Saturday" name="day" value="SAT" data-pricing="full">
+            <input type="radio" id="Saturday" name="day" value="SAT" data-pricing="fullprice">
             <label for="Saturday">Saturday 6pm</label>
-            <input type="radio" id="Sunday" name="day" value="SUN" data-pricing="full">
+            <input type="radio" id="Sunday" name="day" value="SUN" data-pricing="fullprice">
             <label for="Sunday">Sunday 6pm</label>
           </fieldset>
 
           <h2>Required Seats:</h2>
 
           <h3>Standard Adult</h3>
-          <select name='seats[STA]' data-full="20.5" data-disc="15">
+          <select name='seats[STA]' class='seat-select' data-fullprice="20.5" data-discprice="15">
             <option value=''>Please Select</option>
             <option value='1'>1</option>
             <option value='2'>2</option>
@@ -116,7 +117,7 @@
 
 
           <h3>Standard Concession</h3>
-          <select name='seats[STCON]' data-full="13.5" data-disc="18">
+          <select name='seats[STCON]' class='seat-select' data-fullprice="18" data-discprice="13.5">
             <option value=''>Please Select</option>
             <option value='1'>1</option>
             <option value='2'>2</option>
@@ -132,7 +133,7 @@
 
 
           <h3>Standard Child</h3>
-          <select name='seats[STCH]' data-full="12" data-disc="16.5">
+          <select name='seats[STCH]' class='seat-select' data-fullprice="16.5" data-discprice="12">
             <option value=''>Please Select</option>
             <option value='1'>1</option>
             <option value='2'>2</option>
@@ -148,7 +149,7 @@
 
 
           <h3>First Class Adult</h3>
-          <select name='seats[FIRSTA]' data-full="24" data-disc="30">
+          <select name='seats[FIRSTA]' class='seat-select' data-fullprice="30" data-discprice="24">
             <option value=''>Please Select</option>
             <option value='1'>1</option>
             <option value='2'>2</option>
@@ -164,7 +165,7 @@
 
 
           <h3>First Class Concession</h3>
-          <select name='seats[FIRSTCON]' data-full="22.5" data-disc="27">
+          <select name='seats[FIRSTCON]' class='seat-select' data-fullprice="27" data-discprice="22.5">
             <option value=''>Please Select</option>
             <option value='1'>1</option>
             <option value='2'>2</option>
@@ -180,7 +181,7 @@
 
 
           <h3>First Class Child</h3>
-          <select name='seats[FIRSTCH]' data-full="21" data-disc="24">
+          <select name='seats[FIRSTCH]' class='seat-select' data-fullprice="24" data-discprice="21">
             <option value=''>Please Select</option>
             <option value='1'>1</option>
             <option value='2'>2</option>
@@ -194,16 +195,19 @@
             <option value='10'>10</option>
           </select>
 
+          <h3>Total: <span id=price></price>
+          </span></h3>
 
           <p>
           <h2>Customer Details</h2>
           </p>
           <p><label for="name">Full Name:</label></p>
-          <input type="text" id="name" name="user[name]" placeholder="First Name" required onchange="nameCheck()"/><p id="demo2"></p>
+          <input type="text" id="name" name="user[name]" placeholder="Full Name" required onchange="nameCheck()"/><p id="demo2"></p>
           <p><label for="email">Email:</label></p>
           <input type="email" id="email" name="user[email]" placeholder="Email" required /> 
           <p><label for="mobile">Mobile Number:</label></p>
-          <input type="text" id="mobile" name="user[mobile]" placeholder="Mobile Number" required onchange="phoneNumberCheck()"/><p id="demo3"></p>
+          <!-- <input type="text" id="mobile" name="user[mobile]" placeholder="Mobile Number" required onchange="phoneNumberCheck()"/><p id="demo3"></p> -->
+          <input type="text" id="mobile" name="user[mobile]" placeholder="Mobile Number" required pattern= "(\(04\)|04|\+614)( ?\d){8}"/>
           <p><input type="submit" value="Submit"></p>
 
         </form>
