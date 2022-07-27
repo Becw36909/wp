@@ -220,7 +220,7 @@ input[type="text"] {
   padding: 8px 16px;
   margin: 5px 0;
   box-sizing: border-box;
-  border: 2px solid maroon;
+  border: 2px solid var(--skyblue);
   background-color: var(--white);
   border-radius: 4px;
 }
@@ -230,7 +230,7 @@ input[type="email"] {
   padding: 8px 16px;
   margin: 5px 0;
   box-sizing: border-box;
-  border: 2px solid maroon;
+  border: 2px solid var(--skyblue);
   background-color: var(--white);
   border-radius: 4px;
 }
@@ -371,10 +371,7 @@ select {
     font-size: 4vw;
     border: 5px solid var(--skyblue);
   }
-  nav#topnav a:link,
-  a:visited {
-    display: block;
-  }
+
   .flex-container {
     font-size: 4vw;
   }
@@ -468,6 +465,11 @@ select {
 }
 
 @media screen and (max-width: 480px) {
+
+  header {
+    font-size: 125%;
+    text-align: center;
+  }
   .heading {
     font-size: 4vw;
   }
@@ -476,7 +478,6 @@ select {
     font-size: 4vw;
   }
   nav#topnav {
-    font-size: 4vw;
     border: 5px solid var(--skyblue);
   }
   .flex-container {
