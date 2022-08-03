@@ -1,3 +1,6 @@
+<?php require_once('tools.php') ;
+?>
+
 <!DOCTYPE html>
 <html lang='en'>
 
@@ -8,7 +11,7 @@
   <meta name="author" content="Rebecca Watson">
   <meta name="description" content="Lunardo Cinema Booking Page">
   <link rel="stylesheet" href="style.css" type="text/css">
-  <!-- <link rel="icon" href='../media/lunastar.png' type="image/x-icon"> -->
+  <link rel="icon" href='../../media/lunastar.png'type="image/x-icon">
   <script src="script.js"></script>
 
 
@@ -22,11 +25,12 @@
 
 <body>
 
-  <header>
+  <!-- <header>
     <div>
       <h1>LUNARDO Cinema &#x2606</h1>
     </div>
-  </header>
+  </header> -->
+  <?php lunardoHeader();?>
 
   <nav id="topnav">
     <a href="index.php">BACK TO LUNARDO MAIN PAGE</a>
@@ -224,7 +228,7 @@ SESSION Contains:
 <?php print_r($_SESSION) ?>
       </pre>
   </aside>
-
+  <div><?php printMyCode();?></div>
 
 </body>
 

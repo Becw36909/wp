@@ -46,6 +46,7 @@ header {
   box-sizing: border-box;
   background-color: var(--skyblue);
   text-align: center;
+  font-size: 125%;
 }
 
 .heading2 {

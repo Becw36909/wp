@@ -1,3 +1,6 @@
+<?php require_once('tools.php') ;
+?>
+
 <!DOCTYPE html>
 <html lang='en'>
 
@@ -6,9 +9,8 @@
   <meta charset="utf-8">
   <meta name="author" content="Rebecca Watson">
   <meta name="description" content="Lunardo Cinema">
-
   <link rel="stylesheet" href="style.css" type="text/css">
-  <!-- <link rel="icon" href='../media/lunastar.png' type="image/x-icon"> -->
+  <link rel="icon" href='../../media/lunastar.png'type="image/x-icon">
   <script src="script.js"></script>
 
 
@@ -22,12 +24,15 @@
 </head>
 
 <body onscroll="currentLinks()">
-
+<!-- 
   <header>
     <div>
       <h1>LUNARDO Cinema &#x2606</h1>
     </div>
-  </header>
+  </header> -->
+
+  <?php lunardoHeader();?>
+  
 
   <nav id="topnav">
 
@@ -255,7 +260,6 @@
                 </div>
                 <div class="movie-times">
                   <h3>Session Times:</h3>
-                  <p>Session Times:</p>
                   <p>Monday: 6pm</p>
                   <p>Tuesday: 6pm</p>
                   <p>Saturday: 9pm</p>
@@ -288,6 +292,12 @@
       <div>Disclaimer: This website is not a real website and is being developed as part of a School of Science Web Programming course at RMIT University in Melbourne, Australia.</div>
       <div><button id='toggleWireframeCSS' onclick='toggleWireframe()'>Toggle Wireframe CSS</button></div>
   </footer>
+  <div><?php printMoviePanel('ACT') ;?></div>
+  <div><?php printMoviePanel('RMC') ;?></div>
+  <div><?php printMovieTimes('ACT');?></div>
+  <div><?php printMovieTimes('RMC');?></div>
+  <div><?php printMovie() ;?></div>
+  <div><?php debugModule();?></div>
 
 </body>
 

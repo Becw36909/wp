@@ -1,4 +1,3 @@
-/* Insert your javascript here */
 
 var formTotal; 
 
