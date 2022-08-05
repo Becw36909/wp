@@ -1,4 +1,4 @@
-<?php require_once('tools.php') ;
+<?php require_once('tools.php');
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +10,7 @@
   <meta name="author" content="Rebecca Watson">
   <meta name="description" content="Lunardo Cinema">
   <link rel="stylesheet" href="style.css" type="text/css">
-  <link rel="icon" href='../../media/lunastar.png'type="image/x-icon">
+  <link rel="icon" href='../../media/lunastar.png' type="image/x-icon">
   <script src="script.js"></script>
 
 
@@ -24,15 +24,15 @@
 </head>
 
 <body onscroll="currentLinks()">
-<!-- 
+  <!-- 
   <header>
     <div>
       <h1>LUNARDO Cinema &#x2606</h1>
     </div>
   </header> -->
 
-  <?php lunardoHeader();?>
-  
+  <?php lunardoHeader(); ?>
+
 
   <nav id="topnav">
 
@@ -134,153 +134,15 @@
         <h2>Now Showing</h2>
       </div>
 
-
       <div id="movie-card-container">
-
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <div class="front-panel">
-                <div class="movie-poster"><img src="../../media/topgun.png" alt="A Top Gun movie poster featuring the Actor Tom Cruise 
-      in front of a plane" /></div>
-                <div class="movie-name">
-                  <h3>TOP GUN (M)</h3>
-                </div>
-              </div>
-            </div>
-            <div class="flip-card-back">
-              <div class="back-panel">
-
-                <div class="movie-blurb">
-                  <h3>TOP GUN (M)</h3>
-                  <p>After more than thirty years of service as one of the Navy's top aviators, Pete Mitchell is where he belongs.</p>
-                </div>
-                <div class="movie-times">
-                  <h3>Session Times:</h3>
-                  <p>Monday: 9pm</p>
-                  <p>Tuesday: 9pm</p>
-                  <p>Wednesday: 9pm</p>
-                  <p>Friday: 9pm</p>
-                  <p>Saturday: 6pm</p>
-                  <p>Sunday: 6pm</p>
-                  <form action="booking.php" method='get'>
-                    <input type="hidden" name="movie" value="ACT">
-                    <input type="submit" value="Book Now">
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <div class="front-panel">
-                <div class="movie-poster"><img src="../../media/mrsharris.png" alt="A movie poster depicting Mrs Harris 
-    in front of a pink background" /></div>
-                <div class="movie-name">
-                  <h3>Mrs Harris Goes to Paris (PG)</h3>
-                </div>
-              </div>
-            </div>
-            <div class="flip-card-back">
-              <div class="back-panel">
-                <div class="movie-blurb">
-                  <h3>Mrs Harris Goes to Paris (PG)</h3>
-                  <p>A widowed cleaning lady in 1950s London falls madly in love with a couture Dior dress, and decides that she must have one of her own.</p>
-                </div>
-                <div class="movie-times">
-                  <h3>Session Times:</h3>
-                  <p>Wednesday: 12pm</p>
-                  <p>Friday: 12pm</p>
-                  <p>Saturday: 3pm</p>
-                  <p>Sunday: 3pm</p>
-                  <form action="booking.php" method='get'>
-                    <input type="hidden" name="movie" value="ACT">
-                    <input type="submit" value="Book Now">
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <div class="front-panel">
-                <div class="movie-poster"><img src="../../media/lightyear.png" alt="A movie poster of the toy Buzz Lightyear blasting off into space" /></div>
-                <div class="movie-name">
-                  <h3>Lightyear (PG)</h3>
-                </div>
-              </div>
-            </div>
-            <div class="flip-card-back">
-              <div class="back-panel">
-                <div class="movie-blurb">
-                  <h3>Lightyear (PG)</h3>
-                  <p>While spending years attempting to return home, marooned Space Ranger Buzz Lightyear encounters
-                    an army of ruthless robots commanded by Zurg.</p>
-                </div>
-                <div class="movie-times">
-                  <h3>Session Times:</h3>
-                  <p>Monday: 12pm</p>
-                  <p>Tuesday: 12pm</p>
-                  <p>Wednesday: 6pm</p>
-                  <p>Friday: 6pm</p>
-                  <p>Saturday: 12pm</p>
-                  <p>Sunday: 12pm</p>
-                  <form action="booking.php" method='get'>
-                    <input type="hidden" name="movie" value="ACT">
-                    <input type="submit" value="Book Now">
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <div class="front-panel">
-                <div class="movie-poster"><img src="../../media/Prithviraj.png" alt="A movie poster of the main character Prithviraj" /></div>
-                <div class="movie-name">
-                  <h3>Prithviraj (PG)</h3>
-                </div>
-              </div>
-            </div>
-            <div class="flip-card-back">
-              <div class="back-panel">
-                <div class="movie-blurb">
-                  <h3>Prithviraj (PG)</h3>
-                  <p>A fearless warrior. An epic love story. Witness the grand saga of Samrat Prithviraj Chauhan.</p>
-                </div>
-                <div class="movie-times">
-                  <h3>Session Times:</h3>
-                  <p>Monday: 6pm</p>
-                  <p>Tuesday: 6pm</p>
-                  <p>Saturday: 9pm</p>
-                  <p>Sunday: 9pm</p>
-                  <form action="booking.php" method='get'>
-                    <input type="hidden" name="movie" value="ACT">
-                    <input type="submit" value="Book Now">
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
+        <div><?php printMoviePanel('ACT'); ?></div>
+        <div><?php printMoviePanel('RMC'); ?></div>
+        <div><?php printMoviePanel('FAM'); ?></div>
+        <div><?php printMoviePanel('AHF'); ?></div>
 
       </div>
 
-
-
     </section>
-
 
   </main>
 
@@ -292,12 +154,15 @@
       <div>Disclaimer: This website is not a real website and is being developed as part of a School of Science Web Programming course at RMIT University in Melbourne, Australia.</div>
       <div><button id='toggleWireframeCSS' onclick='toggleWireframe()'>Toggle Wireframe CSS</button></div>
   </footer>
-  <div><?php printMoviePanel('ACT') ;?></div>
-  <div><?php printMoviePanel('RMC') ;?></div>
-  <div><?php printMovieTimes('ACT');?></div>
-  <div><?php printMovieTimes('RMC');?></div>
-  <div><?php printMovie() ;?></div>
-  <div><?php debugModule();?></div>
+  <!-- <div><?php printMoviePanel('ACT'); ?></div>
+  <div><?php printMoviePanel('RMC'); ?></div>
+  <div><?php printMoviePanel('FAM'); ?></div>
+  <div><?php printMoviePanel('AHF'); ?></div>
+  <div><?php printPanelMovieTimes('AHF'); ?></div>
+  <div><?php printPanelMovieTimes('RMC'); ?></div>
+  <div><?php printMovie(); ?></div> -->
+
+  <div><?php debugModule(); ?></div>
 
 </body>
 
