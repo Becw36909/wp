@@ -55,6 +55,11 @@ header {
   background-color: var(--maroon);
 }
 
+span {
+  color:red;
+  font-size: 125%
+  /* font-weight: bold; */
+}
 footer {
   background-color: var(--skyblue);
   color: black;

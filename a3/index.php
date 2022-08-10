@@ -134,11 +134,16 @@
         <h2>Now Showing</h2>
       </div>
 
-      <div id="movie-card-container">
+      <!-- <div id="movie-card-container">
         <div><?php printMoviePanel('ACT'); ?></div>
         <div><?php printMoviePanel('RMC'); ?></div>
         <div><?php printMoviePanel('FAM'); ?></div>
         <div><?php printMoviePanel('AHF'); ?></div>
+
+      </div> -->
+
+      <div id="movie-card-container">
+      <?php printMoviePanels(); ?>
 
       </div>
 
@@ -154,13 +159,6 @@
       <div>Disclaimer: This website is not a real website and is being developed as part of a School of Science Web Programming course at RMIT University in Melbourne, Australia.</div>
       <div><button id='toggleWireframeCSS' onclick='toggleWireframe()'>Toggle Wireframe CSS</button></div>
   </footer>
-  <!-- <div><?php printMoviePanel('ACT'); ?></div>
-  <div><?php printMoviePanel('RMC'); ?></div>
-  <div><?php printMoviePanel('FAM'); ?></div>
-  <div><?php printMoviePanel('AHF'); ?></div>
-  <div><?php printPanelMovieTimes('AHF'); ?></div>
-  <div><?php printPanelMovieTimes('RMC'); ?></div>
-  <div><?php printMovie(); ?></div> -->
 
   <div><?php debugModule(); ?></div>
 

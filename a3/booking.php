@@ -1,5 +1,10 @@
 <?php require_once('tools.php');
+require_once('post-validation.php');
 validateMovieCode();
+// $fieldErrors = validateBooking();
+$errors = validateBooking();
+print_r($errors);
+// checkingMovieDays();
 ?>
 
 
@@ -14,7 +19,7 @@ validateMovieCode();
   <meta name="description" content="Lunardo Cinema Booking Page">
   <link rel="stylesheet" href="style.css" type="text/css">
   <link rel="icon" href='../../media/lunastar.png' type="image/x-icon">
-  <script src="script.js"></script>
+  <!-- <script src="script.js"></script> -->
 
 
   <title>Lunardo Booking Page</title>
@@ -33,13 +38,16 @@ validateMovieCode();
     <a href="index.php">BACK TO LUNARDO MAIN PAGE</a>
   </nav>
 
-  <!-- <div><p><?php getMovie(); ?></p> </div>  -->
+  <div>
+    <p><?php getMovie(); ?></p>
+  </div>
   <main>
     <section id="Booking">
 
       <?php getMovieData(); ?>
 
-      <div id="form">
+      <?php formData($errors); ?>
+      <!-- <div id="form">
 
         <form name="bookingForm" method="post" oninput="return logDetails()" onsubmit="return formValidate();">
 
@@ -55,9 +63,9 @@ validateMovieCode();
 
           <p></p>
 
-          <h2 class="heading2">Required Seats:</h2>
+          <h2 class="heading2">Required Seats:</h2> -->
 
-          <!-- <h3>Standard Adult</h3>
+      <!-- <h3>Standard Adult</h3>
           <select name='seats[STA]' class='seat-select' data-fullprice="20.5" data-discprice="15">
             <?php seatNumbers(); ?>
           </select>
@@ -92,13 +100,13 @@ validateMovieCode();
             <?php seatNumbers(); ?>
           </select> -->
 
-          <?php seatPrices(); ?>
+      <!-- <?php seatPrices(); ?>
 
           <h3>Total: <span id=price></price>
             </span></h3>
 
           <p>
-          <h2 class="heading2">Customer Details</h2>
+          <h2 class="heading2">Customer Details </h2>
           </p>
           <p><label for="name">Full Name:</label></p>
           <input type="text" id="name" name="user[name]" placeholder="Full Name" required onchange="nameCheck()" />
@@ -112,7 +120,7 @@ validateMovieCode();
 
         </form>
 
-      </div>
+      </div> -->
     </section>
 
   </main>
@@ -127,16 +135,16 @@ validateMovieCode();
     <hr>
     <h3>Debug Area</h3>
     <pre>
-GET Contains:
+<!-- GET Contains:
 <?php print_r($_GET) ?>
 POST Contains:
 <?php print_r($_POST) ?>
 SESSION Contains:
-<?php print_r($_SESSION) ?>
+<?php print_r($_SESSION) ?> -->
+<?php debugModule(); ?>
       </pre>
   </aside>
-  <div><?php printMyCode(); ?></div>
-
+  <!-- <div><?php printMyCode(); ?></div> -->
 </body>
 
 </html>

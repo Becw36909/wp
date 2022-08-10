@@ -1,5 +1,6 @@
 
 var formTotal; 
+var countErrors=0;
 
 function linkThis() {
 document.write("You are learning how to call JavaScript function in html");
@@ -27,7 +28,10 @@ function nameCheck() {
   {
     alert("You have entered an invalid name!");
     console.log("name checked WRONG");
+    countErrors++;
+    console.log(countErrors);
     return false;
+
   }
 }
 
@@ -45,6 +49,8 @@ function phoneNumberCheck() {
   {
     alert("You have entered an invalid number!");
     console.log("number checked WRONG");
+    countErrors++;
+    console.log("countErrors= "+countErrors);
     return false;
   }
   
@@ -55,12 +61,43 @@ function phoneNumberCheck() {
     return document.getElementById(sP);
   }
 
+  // function clearErrors() {
+  //   alert("about to clear errors")
+
+  // }
+
+//   // This is where it all happens!
+//   function formValidate() {
+//     //clearErrors();
+//     alert("You pressed submit");
+//   // var countErrors=0;
+//   // if (total > 0){
+//   //   return true;
+//   // }
+//   // else {
+//   //   alert("You need to choose seat/s");
+//   //   console.log("no seats checked");
+//   //   return false;
+// if (formTotal > 0 && countErrors==0){
+//   alert("YOU PASSED THE TEST");
+//   return (countErrors==0);
+// }
+//   else {
+//     alert("You need to choose seat numbers and day of the week");
+
+//   }
+// }
+
+
+//I SHOULD REALLY CLEAN THE BELOW UP AND MAKE IT !formTotal and
+//TRY TO TAKE SOME TIME TO ADD THE !countErrors ==0 and try to
+//add that functionality to it as well
 
   // This is where it all happens!
   function formValidate() {
     //clearErrors();
     alert("You pressed submit");
-  var countErrors=0;
+  // var countErrors=0;
   // if (total > 0){
   //   return true;
   // }
@@ -78,6 +115,7 @@ if (formTotal > 0){
 
   }
 }
+
     
     function currentLinks() {
       console.clear();

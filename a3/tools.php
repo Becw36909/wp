@@ -7,6 +7,10 @@ session_start();
 */
 $indexPage = "https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php";
 $receiptPage = "https://titan.csit.rmit.edu.au/~s3903758/wp/a3/receipt.php";
+$seatError = '';
+$emailError = '';
+$nameError = '';
+$phoneError = '';
 
 
 $movies = [
@@ -108,6 +112,17 @@ $movies = [
 
 // $seats = ['Please Select', '1', '2', '3','4','5', '6', '7', '8', '9', '10'];
 
+function checkingMovieDays()
+{
+  $movieID = getMovie();
+  global $movies;
+  foreach ($movies[$movieID]['movie-times'] as $day => $time) {
+    echo $day;
+    echo "<br>";
+    echo "<br>";
+  }
+}
+
 function printPanelMovieTimes($movieID)
 {
   global $movies;
@@ -179,49 +194,75 @@ CDATA;
 }
 
 
-// function getMovieTimes($movieID) {
-//   global $movies;
-//   foreach ($movies[$movieID]['movie-times'] as $day => $time) {
-//     return $day;
-//     return $time;
-//   }
-// }
-
-function printMovie()
+function printMoviePanels()
 {
   global $movies;
   foreach ($movies as $movieID => $value) {
-    echo "<br>";
-    echo $value['title'];
-    echo "<br>";
-    echo $value['classification'];
-    echo "<br>";
-    echo $value['movie-blurb'];
-    echo "<br>";
-    echo "Hello";
-    echo "<br>";
-    echo "<br>";
-    echo print_r($value['movie-times']);
-    echo "<br>";
-    echo "<br>";
-    foreach ($value['movie-times'] as $day => $time) {
-      echo $day;
-      echo $time;
-      echo "<br>";
-      echo "<br>";
-    }
-    echo "<br>";
-    echo print_r($value['movie-times']['Monday']);
-    echo "<br>";
-    echo "Hello";
-    echo "<br>";
+    // echo $movieID;
+    // echo "<br>";
+    // echo $value['title'];
+    // echo "<br>";
+    // echo $value['classification'];
+    // echo "<br>";
+    // echo $value['movie-blurb'];
+    // echo "<br>";
+    // echo "Hello";
+    // echo "<br>";
+    // echo "<br>";
+    // echo print_r($value['movie-times']);
+    // echo "<br>";
+    // echo "<br>";
+    // foreach ($value['movie-times'] as $day => $time) {
+    //   echo $day;
+    //   echo $time;
+    //   echo "<br>";
+    //   echo "<br>";
+    // }
+    // echo "<br>";
+    // echo print_r($value['movie-times']['Monday']);
+    // echo "<br>";
+    // echo "Hello";
+    // echo "<br>";
+    echo <<<"CDATA"
+    <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="front-panel">
+                <div class="movie-poster"><img src={$movies[$movieID]['movie-poster']} alt={$movies[$movieID]['alt']} /></div>
+                <div class="movie-name">
+                  <h3>{$movies[$movieID]['title']}{$movies[$movieID]['classification']}</h3>
+                </div>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <div class="back-panel">
+                <div class="movie-blurb">
+                  <h3>{$movies[$movieID]['title']}{$movies[$movieID]['classification']}</h3>
+                  <p>{$movies[$movieID]['movie-blurb']}</p>
+                </div>
+                <div class="movie-times">
+                  <h3>Session Times:</h3>
+   CDATA;
+    printPanelMovieTimes($movieID);
+    echo <<<"CDATA"
+                  <form action="booking.php" method='get'>
+                    <input type="hidden" name="movie" value={$movies[$movieID]['code']}>
+                    <input type="submit" value="Book Now">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  CDATA;
   }
 }
 
-// function printMoviePanels($movieID)
+// function printMoviePanels()
 // {
 //   global $movies;
-//   echo <<<"CDATA"
+//   foreach ($movies as $movie => $movieID){
+//     echo <<<"CDATA"
 //     <div class="flip-card">
 //           <div class="flip-card-inner">
 //             <div class="flip-card-front">
@@ -234,16 +275,17 @@ function printMovie()
 //             </div>
 //             <div class="flip-card-back">
 //               <div class="back-panel">
-
 //                 <div class="movie-blurb">
 //                   <h3>{$movies[$movieID]['title']}{$movies[$movieID]['classification']}</h3>
 //                   <p>{$movies[$movieID]['movie-blurb']}</p>
 //                 </div>
 //                 <div class="movie-times">
 //                   <h3>Session Times:</h3>
-
+//    CDATA;
+//   printPanelMovieTimes($movieID);
+//   echo <<<"CDATA"
 //                   <form action="booking.php" method='get'>
-//                     <input type="hidden" name="movie" value={$movies[$movieID]}>
+//                     <input type="hidden" name="movie" value={$movies[$movieID]['code']}>
 //                     <input type="submit" value="Book Now">
 //                   </form>
 //                 </div>
@@ -252,6 +294,8 @@ function printMovie()
 //           </div>
 //         </div>
 //   CDATA;
+//   }
+
 // }
 
 function printMoviePanel($movieID)
@@ -319,9 +363,10 @@ function getMovieData()
  CDATA;
 }
 
+//get rid of the echo when tidying up
 function getMovie()
 {
-  // echo $_GET['movie'];
+  echo $_GET['movie'];
   return $_GET['movie'];
 }
 
@@ -333,8 +378,11 @@ function createRadioButtons()
   $price = '';
 
   foreach ($movies[$movieID]['movie-times'] as $day => $time) {
-    if ($day == 'Monday' || $time == '12pm') {
+    // if ($day == 'Monday' || $time == '12pm') {
+    if ($day == 'Monday' || $time == '12pm' && ($day != 'Saturday' && $day != 'Sunday')) {
       $price = "discprice";
+      // } elseif (($time == '12pm') && ($day != 'Saturday' && $day != 'Sunday')) {
+      //   $price = "discpriceprice";
     } else {
       $price = "fullprice";
     }
@@ -344,7 +392,6 @@ function createRadioButtons()
   CDATA;
   }
 }
-
 
 // function validateMovieCode()
 // {
@@ -387,10 +434,10 @@ function validateMovieCode()
 function debugModule()
 {
   echo "<pre id='debug'>";
-  echo "POST Contains: \n";
-  print_r($_POST);
   echo "GET Contains: \n";
   print_r($_GET);
+  echo "POST Contains: \n";
+  print_r($_POST);
   echo "SESSION Contains: \n";
   print_r($_SESSION);
   echo "</pre>";
@@ -418,3 +465,68 @@ function lunardoHeader()
   </header>
   CDATA;
 }
+
+// Returns a blank or alternative string if candidate string is unset / undefined
+function unsetFB(&$str, $fallback = '')
+{
+  return (isset($str) ? $str : $fallback);
+}
+
+//GO AND GET THE CORRECT LINES FROM BOOKING.PHP TO PUT BACK IN THE JS AND
+//HTML CODE CHECKS I TOOK OUT OF HERE WHEN I WAS PUTTING IN THE PHP CHECKS
+function formData($errors)
+{
+  // print_r($errors);
+  // global $nameError;
+  echo "<br>";
+  // echo $nameError;
+  // $nameError = ' <span style="color:red">' . $errors['user']['name'] . '</span>';
+  $nameError = ' <span >' . unsetFB($errors['user']['name']) . '</span>';
+  $seatError = ' <span >' . unsetFB($errors['seats']) . '<span >';
+  $emailError = ' <span >' . unsetFB($errors['user']['email']) . '<span >';
+  $phoneError = ' <span >' . unsetFB($errors['user']['mobile']) . '<span >';
+  $email = unsetFB($_POST['user']['email']);
+  echo "<br>";
+  // echo $nameError;
+  // print_r($errors['user']['name']);
+  echo "<br>";
+  $movieID = getMovie();
+  echo <<< CDATA
+  <div id="form">
+  <form name="bookingForm" method="post" oninput="return logDetails()" onsubmit="return formValidate();">
+    <input type="hidden" name="movie" value={$movieID}>
+    <h2 class="heading2">Session Day and Time</h2>
+    <fieldset>
+      <legend>
+        <h3>Please choose:</h3>
+      </legend>
+  CDATA;
+  createRadioButtons();
+  echo <<< CDATA
+    </fieldset>
+    <h2 class="heading2">Required Seats:</h2>
+    <p>{$seatError}</p>
+  CDATA;
+  seatPrices();
+  echo <<< CDATA
+    <h3>Total: <span id=price></price>
+      </span></h3>
+    <p>
+    <h2 class="heading2">Customer Details </h2>
+    </p>
+    <p><label for="name">Full Name:</label>{$nameError}</p>
+    <input type="text" id="name" name="user[name]" placeholder="Full Name" />
+    <p id="demo2"></p> 
+    <p><label for="email">Email:</label>{$emailError}</p>
+    <input type="email" id="email" name="user[email]" placeholder="Email" value={$email} />
+    
+    <p><label for="mobile">Mobile Number:</label>{$phoneError}</p>
+    <input type="text" id="mobile" name="user[mobile]" placeholder="Mobile Number"  />
+    
+    <p id="demo3"></p>
+    <p><input type="submit" value="Submit"></p>
+  </form>
+</div>
+CDATA;
+}
+
