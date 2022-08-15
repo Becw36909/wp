@@ -3,11 +3,6 @@
 $maxSeats = 10;
 $minSeats = 1;
 $uncheckedSeat = '';
-// $seatError = '';
-// $emailError = '';
-// $nameError = '';
-// $phoneError = '';
-// $selectedSeats = 
 
 /* Call this function in the booking page like so: 
    $fieldErrors = validateBooking();
@@ -22,26 +17,30 @@ function validateBooking()
     $errors = findPostErrors();
     if (count($errors) > 0) {
       echo "you suck \n";
-      // $nameError = ' <span style="color:red">' . unsetFB($errors['name']) . '</span>';
 
       return $errors;
     } else {
-      echo "you are free to go \n";;
+      // $bookingDetails [] = which will be an array of everything to go in for the bookings.txt to hold a string to
+      //add the POST data to the session with
+      //$_SESSION = $_POST;
+      //then add the bookingDetails[] to SESSION with 
+      //$_SESSION['bookingDetails'] = $bookingDetails;
+      echo "you are free to go \n";
+      // header('Location: https://titan.csit.rmit.edu.au/~s3903758/wp/a3/receipt.php');
+
     }
   } else {
     echo "no STUFFs FOUNDs IN the POST \n";
-    // echo "<br>";
   }
-  // if (!$errors)
 }
 
-function setChecked (&$str, $val) {
-  return ( isset($str) && $str == $val ? 'checked' : '' ); 
-}
+// function setChecked (&$str, $val) {
+//   return ( isset($str) && $str == $val ? 'checked' : '' ); 
+// }
 
-function setSelected (&$str, $val) {
-  return ( isset($str) && $str == $val ? 'selected' : '' ); 
-}
+// function setSelected (&$str, $val) {
+//   return ( isset($str) && $str == $val ? 'selected' : '' ); 
+// }
 
 function findPostErrors()
 {
@@ -55,6 +54,8 @@ function findPostErrors()
 
   $phonePattern = "/(\(04\)|04|\+614)( ?\d){8}/i";
   $namePattern = "/[A-Za-z \-'.Æ]{1,127}/i";
+
+  // check Name
   if ($_POST['user']['name'] == '') {
     $errors['user']['name'] = "Name can't be blank";
     echo $errors['user']['name'] . " \n";
@@ -62,7 +63,7 @@ function findPostErrors()
     $errors['user']['name'] = "Name must be valid";
     echo $errors['user']['name'] . " \n";
   }
-  // checkName();
+  // check Email
   if ($_POST['user']['email'] == '') {
     $errors['user']['email'] = "Email can't be blank";
     echo $errors['user']['email'] . " \n";
@@ -70,7 +71,7 @@ function findPostErrors()
     $errors['user']['email'] = "Email must be a valid address";
     echo $errors['user']['email'] . " \n";
   }
-  // checkEmail();
+  // check Phone Number
   if ($_POST['user']['mobile'] == '') {
     $errors['user']['mobile'] = "Mobile can't be blank";
     echo $errors['user']['mobile'] . " \n";
@@ -78,25 +79,30 @@ function findPostErrors()
     $errors['user']['mobile'] = "Phone number must be a valid Australian number";
     echo $errors['user']['mobile'] . " \n";
   }
-  // checkPhoneNumber();
+
+  //Check movie exists
   $movie = $_POST['movie'];
   echo $movie;
   $moviefound = array_key_exists($_POST['movie'], $movies) ? "True" : "False";
   echo $moviefound . " movie found";
   echo "<br>";
   if (!array_key_exists($_POST['movie'], $movies)) {
+    echo "MOVIE NOT FOUND";
     header('Location: https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php');
   }
-  if (!array_key_exists($_POST['day'], $movies[$movie]['movie-times'])) {
-    header('Location: https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php');
-  }
-  echo "<br>";
-  $dayfound = array_key_exists($_POST['day'], $movies[$movie]['movie-times']) ? "True" : "False";
-  echo $dayfound . " day found";
-  echo "<br>";
 
-  $seatInt = filter_var($_POST['seats'], FILTER_VALIDATE_INT) ? "True" : "False";
-  echo $seatInt;
+  //Check day exists 
+  if (!empty($_POST['day']) && !array_key_exists($_POST['day'], $movies[$movie]['movie-times'])) {
+  // if (($_POST['day'] != $movies[$movie]['movie-times'])) {
+    echo "DAY NOT FOUND";
+    header('Location: https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php');
+  } elseif (empty($_POST['day'])) {
+    $errors['day'] = "You must choose a day to book";
+    echo $errors['day'];
+  }
+
+
+  echo "<br>";
   print_r($_POST['seats']);
   echo "<br>";
   echo "FOREACH STARTS HERE";
@@ -104,19 +110,23 @@ function findPostErrors()
   foreach ($_POST['seats'] as $class => $amount) {
     $seatInt = is_numeric($amount) ? "True" : "False";
     echo $seatInt;
-    // echo $class . ": " . $amount;
-    // echo "<br>";
     echo "<br>";
   }
+  echo "Array sum: ";
   echo array_sum($_POST['seats']);
+  echo "<br>";
   $seatTotal = array_sum($_POST['seats']) > 0  ? "True" : "False";
+  echo "Seat Total Greater than 0?? :";
   echo $seatTotal;
   echo "<br>";
+
+  //Check there are seats chosen
   if (array_sum($_POST['seats']) < $minSeats) {
-    // echo " You must choose at least one seat to book";
     $errors['seats'] = "You must choose at least one seat to book";
     echo $errors['seats'] . " \n";
   }
+
+  //Check seats are valid numbers
   foreach ($_POST['seats'] as $class => $amount) {
     if (!filter_var($amount, FILTER_VALIDATE_INT) && !$amount == $uncheckedSeat) {
       echo "YOU ARE VERY NAUGHTY";
@@ -131,88 +141,6 @@ function findPostErrors()
   }
 
 
-  // if (!filter_var($_POST['seats'], FILTER_VALIDATE_INT)) {
-  //   header('Location: https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php');
-  // }
-
   return $errors;
 }
 
-function checkName()
-{
-  $namePattern = "/[A-Za-z \-'.Æ]{1,127}/i";
-  if ($_POST['user']['name'] == '') {
-    $errors['user']['name'] = "Name can't be blank";
-    echo $errors['user']['name'] . " \n";
-  } elseif (!preg_match($namePattern, $_POST['user']['name'])) {
-    $errors['user']['name'] = "Name must be valid";
-    echo $errors['user']['name'] . " \n";
-  }
-  return $errors;
-}
-
-function checkEmail()
-{
-  if ($_POST['user']['email'] == '') {
-    $errors['user']['email'] = "Email can't be blank";
-    echo $errors['user']['email'] . " \n";
-  } elseif (!filter_var($_POST['user']['email'], FILTER_VALIDATE_EMAIL)) {
-    $errors['user']['email'] = "Email must be a valid address";
-    echo $errors['user']['email'] . " \n";
-    return $errors;
-  }
-}
-
-function checkPhoneNumber()
-{
-  $phonePattern = "/(\(04\)|04|\+614)( ?\d){8}/i";
-  if ($_POST['user']['mobile'] == '') {
-    $errors['user']['mobile'] = "Mobile can't be blank";
-    echo $errors['user']['mobile'] . " \n";
-  } elseif (!preg_match($phonePattern, $_POST['user']['mobile'])) {
-    $errors['user']['mobile'] = "Phone number must be a valid Australian number";
-    echo $errors['user']['mobile'] . " \n";
-  }
-  return $errors;
-}
-
-
-// if (!empty($_POST))
-// {
-//   echo "STUFF FOUND IN POST \n";
-//   echo "<br>";
-// }
-// else {
-//   echo "no STUFFs FOUNDs IN the POST \n";
-//   echo "<br>";
-// }
-
-// function printMovies() {
-//   global $movies;
-//   foreach ($movies as $movieID => $value) {
-//     echo $movieID;
-//     echo "<br>";
-//     echo $value['title'];
-//     echo "<br>";
-//     echo $value['classification'];
-//     echo "<br>";
-//     echo $value['movie-blurb'];
-//     echo "<br>";
-//     echo "Hello";
-//     echo "<br>";
-//     echo "<br>";
-//     echo print_r($value['movie-times']);
-//     echo "<br>";
-//     echo "<br>";
-//     foreach ($value['movie-times'] as $day => $time) {
-//       echo $day;
-//       echo $time;
-//       echo "<br>";
-//       echo "<br>";
-//     }
-//     echo "<br>";
-//     echo print_r($value['movie-times']['Monday']);
-//     echo "<br>";
-//     echo "Hello";
-//     echo "<br>";
-// }}

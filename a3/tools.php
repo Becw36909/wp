@@ -7,10 +7,12 @@ session_start();
 */
 $indexPage = "https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php";
 $receiptPage = "https://titan.csit.rmit.edu.au/~s3903758/wp/a3/receipt.php";
+$dayError = '';
 $seatError = '';
 $emailError = '';
 $nameError = '';
 $phoneError = '';
+$price;
 
 
 $movies = [
@@ -110,7 +112,7 @@ $movies = [
   ]
 ];
 
-// $seats = ['Please Select', '1', '2', '3','4','5', '6', '7', '8', '9', '10'];
+
 
 function checkingMovieDays()
 {
@@ -133,96 +135,146 @@ function printPanelMovieTimes($movieID)
   }
 }
 
-//probably need to fix the below to also give the prices to the seats
-function seatNumbers()
+function setSelected(&$str, $val)
 {
-  echo <<<"CDATA"
-  <option value=''>Please Select</option>
-  <option value='1'>1</option>
-  <option value='2'>2</option>
-  <option value='3'>3</option>
-  <option value='4'>4</option>
-  <option value='5'>5</option>
-  <option value='6'>6</option>
-  <option value='7'>7</option>
-  <option value='8'>8</option>
-  <option value='9'>9</option>
-  <option value='10'>10</option>
-  CDATA;
+  return (isset($str) && $str == $val ? 'selected' : '');
 }
 
-function seatPrices()
+
+$seats = [
+  '' => 'Please Select', 1 => '1', 2 => '2', 3 => '3',
+  4 => '4', 5 => '5', 6 => '6', 7 => '7',
+  8 => '8', 9 => '9', 10 => '10'
+];
+
+
+function seatNumbers()
 {
-  echo <<<"CDATA"
-  <h3>Standard Adult</h3>
-<select name='seats[STA]' class='seat-select' data-fullprice="20.5" data-discprice="15">
-CDATA;
-  seatNumbers();
-  echo <<<"CDATA"
-</select>
-<h3>Standard Concession</h3>
-<select name='seats[STCON]' class='seat-select' data-fullprice="18" data-discprice="13.5">
-CDATA;
-  seatNumbers();
-  echo <<<"CDATA"
-</select>
-<h3>Standard Child</h3>
-<select name='seats[STCH]' class='seat-select' data-fullprice="16.5" data-discprice="12">
-CDATA;
-  seatNumbers();
-  echo <<<"CDATA"
-</select>
-<h3>First Class Adult</h3>
-<select name='seats[FIRSTA]' class='seat-select' data-fullprice="30" data-discprice="24">
-CDATA;
-  seatNumbers();
-  echo <<<"CDATA"
-</select>
-<h3>First Class Concession</h3>
-<select name='seats[FIRSTCON]' class='seat-select' data-fullprice="27" data-discprice="22.5">
-CDATA;
-  seatNumbers();
-  echo <<<"CDATA"
-</select>
-<h3>First Class Child</h3>
-<select name='seats[FIRSTCH]' class='seat-select' data-fullprice="24" data-discprice="21">
-CDATA;
-  seatNumbers();
-  echo <<<"CDATA"
-</select>
-CDATA;
+  global $seats;
+  foreach ($seats as $value => $name) {
+    echo <<<"CDATA"
+  <option value={$value}>{$name}</option>
+  CDATA;
+  }
+  // echo <<<"CDATA"
+  // <option value=''>Please Select</option>
+  // <option value='1'>1</option>
+  // <option value='2'>2</option>
+  // <option value='3'>3</option>
+  // <option value='4'>4</option>
+  // <option value='5'>5</option>
+  // <option value='6'>6</option>
+  // <option value='7'>7</option>
+  // <option value='8'>8</option>
+  // <option value='9'>9</option>
+  // <option value='10'>10</option>
+  // CDATA;
 }
+
+$pricingArr = [
+  'STA' => [
+    'discprice' => '15.00',
+    'fullprice' => '20.50',
+    'name' => "Standard Adult",
+    'id' => "standard-adult"
+  ],
+  'STP' => [
+    'discprice' => '13.50',
+    'fullprice' => '18.00',
+    'name' => "Standard Concession",
+    'id' => "standard-conc"
+  ],
+  'STC' => [
+    'discprice' => '12.00',
+    'fullprice' => '16.50',
+    'name' => "Standard Child",
+    'id' => "standard-child"
+  ],
+  'FCA' => [
+    'discprice' => '24.00',
+    'fullprice' => '30.00',
+    'name' => "First Class Adult",
+    'id' => "first-class-adult"
+  ],
+  'FCP' => [
+    'discprice' => '22.50',
+    'fullprice' => '27.00',
+    'name' => "First Class Concession",
+    'id' => "first-class-conc"
+  ],
+  'FCC' => [
+    'discprice' => '21.00',
+    'fullprice' => '24.00',
+    'name' => "First Class Child",
+    'id' => "first-class-child"
+  ],
+];
+
+
+function seatsSetup()
+{
+  global $pricingArr;
+  global $price;
+  foreach ($pricingArr as $seatType => $value) {
+
+    echo <<<"CDATA"
+    <h3>{$pricingArr[$seatType]['name']}</h3>
+    <select name='seats[{$seatType}]' class='seat-select' data-fullprice={$pricingArr[$seatType]['fullprice']} data-discprice={$pricingArr[$seatType]['discprice']}>
+ CDATA;
+    seatNumbers();
+    echo <<<"CDATA"
+</select>
+CDATA;
+  }
+}
+
+// function seatPrices()
+// {
+//   echo <<<"CDATA"
+//   <h3>Standard Adult</h3>
+// <select name='seats[STA]' class='seat-select' data-fullprice="20.5" data-discprice="15">
+// CDATA;
+//   seatNumbers();
+//   echo <<<"CDATA"
+// </select>
+// <h3>Standard Concession</h3>
+// <select name='seats[STP]' class='seat-select' data-fullprice="18" data-discprice="13.5">
+// CDATA;
+//   seatNumbers();
+//   echo <<<"CDATA"
+// </select>
+// <h3>Standard Child</h3>
+// <select name='seats[STC]' class='seat-select' data-fullprice="16.5" data-discprice="12">
+// CDATA;
+//   seatNumbers();
+//   echo <<<"CDATA"
+// </select>
+// <h3>First Class Adult</h3>
+// <select name='seats[FCA]' class='seat-select' data-fullprice="30" data-discprice="24">
+// CDATA;
+//   seatNumbers();
+//   echo <<<"CDATA"
+// </select>
+// <h3>First Class Concession</h3>
+// <select name='seats[FCP]' class='seat-select' data-fullprice="27" data-discprice="22.5">
+// CDATA;
+//   seatNumbers();
+//   echo <<<"CDATA"
+// </select>
+// <h3>First Class Child</h3>
+// <select name='seats[FCC]' class='seat-select' data-fullprice="24" data-discprice="21">
+// CDATA;
+//   seatNumbers();
+//   echo <<<"CDATA"
+// </select>
+// CDATA;
+// }
 
 
 function printMoviePanels()
 {
   global $movies;
   foreach ($movies as $movieID => $value) {
-    // echo $movieID;
-    // echo "<br>";
-    // echo $value['title'];
-    // echo "<br>";
-    // echo $value['classification'];
-    // echo "<br>";
-    // echo $value['movie-blurb'];
-    // echo "<br>";
-    // echo "Hello";
-    // echo "<br>";
-    // echo "<br>";
-    // echo print_r($value['movie-times']);
-    // echo "<br>";
-    // echo "<br>";
-    // foreach ($value['movie-times'] as $day => $time) {
-    //   echo $day;
-    //   echo $time;
-    //   echo "<br>";
-    //   echo "<br>";
-    // }
-    // echo "<br>";
-    // echo print_r($value['movie-times']['Monday']);
-    // echo "<br>";
-    // echo "Hello";
-    // echo "<br>";
     echo <<<"CDATA"
     <div class="flip-card">
           <div class="flip-card-inner">
@@ -258,82 +310,7 @@ function printMoviePanels()
   }
 }
 
-// function printMoviePanels()
-// {
-//   global $movies;
-//   foreach ($movies as $movie => $movieID){
-//     echo <<<"CDATA"
-//     <div class="flip-card">
-//           <div class="flip-card-inner">
-//             <div class="flip-card-front">
-//               <div class="front-panel">
-//                 <div class="movie-poster"><img src={$movies[$movieID]['movie-poster']} alt={$movies[$movieID]['alt']} /></div>
-//                 <div class="movie-name">
-//                   <h3>{$movies[$movieID]['title']}{$movies[$movieID]['classification']}</h3>
-//                 </div>
-//               </div>
-//             </div>
-//             <div class="flip-card-back">
-//               <div class="back-panel">
-//                 <div class="movie-blurb">
-//                   <h3>{$movies[$movieID]['title']}{$movies[$movieID]['classification']}</h3>
-//                   <p>{$movies[$movieID]['movie-blurb']}</p>
-//                 </div>
-//                 <div class="movie-times">
-//                   <h3>Session Times:</h3>
-//    CDATA;
-//   printPanelMovieTimes($movieID);
-//   echo <<<"CDATA"
-//                   <form action="booking.php" method='get'>
-//                     <input type="hidden" name="movie" value={$movies[$movieID]['code']}>
-//                     <input type="submit" value="Book Now">
-//                   </form>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//   CDATA;
-//   }
 
-// }
-
-function printMoviePanel($movieID)
-{
-  global $movies;
-  echo <<<"CDATA"
-    <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <div class="front-panel">
-                <div class="movie-poster"><img src={$movies[$movieID]['movie-poster']} alt={$movies[$movieID]['alt']} /></div>
-                <div class="movie-name">
-                  <h3>{$movies[$movieID]['title']}{$movies[$movieID]['classification']}</h3>
-                </div>
-              </div>
-            </div>
-            <div class="flip-card-back">
-              <div class="back-panel">
-                <div class="movie-blurb">
-                  <h3>{$movies[$movieID]['title']}{$movies[$movieID]['classification']}</h3>
-                  <p>{$movies[$movieID]['movie-blurb']}</p>
-                </div>
-                <div class="movie-times">
-                  <h3>Session Times:</h3>
-   CDATA;
-  printPanelMovieTimes($movieID);
-  echo <<<"CDATA"
-                  <form action="booking.php" method='get'>
-                    <input type="hidden" name="movie" value={$movies[$movieID]['code']}>
-                    <input type="submit" value="Book Now">
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-  CDATA;
-}
 
 function getMovieData()
 {
@@ -370,15 +347,21 @@ function getMovie()
   return $_GET['movie'];
 }
 
+function setChecked(&$str, $val)
+{
+  return (isset($str) && $str == $val ? 'checked' : '');
+}
+
 function createRadioButtons()
 {
-
   $movieID = getMovie();
   global $movies;
   $price = '';
-
   foreach ($movies[$movieID]['movie-times'] as $day => $time) {
     // if ($day == 'Monday' || $time == '12pm') {
+    // $checkedDay = setChecked($_POST['day'], $day);
+    global $price;
+    $checkedDay = '';
     if ($day == 'Monday' || $time == '12pm' && ($day != 'Saturday' && $day != 'Sunday')) {
       $price = "discprice";
       // } elseif (($time == '12pm') && ($day != 'Saturday' && $day != 'Sunday')) {
@@ -386,34 +369,21 @@ function createRadioButtons()
     } else {
       $price = "fullprice";
     }
+    //   if ($_POST['day'] == $day) {
+    //     $checkedDay = 'checked';
+    //   } else {
+    //     $checkedDay = '';
+    //   }
+    //   //the below keeps only checking the last day in the loop
+    //   // <input type="radio" id={$day} name="day" value={$day} data-pricing={$price} checked={$checkedDay}>
+
+    // echo $price;
     echo <<<"CDATA"
-  <input type="radio" id={$day} name="day" value={$day} data-pricing={$price}>
-  <label for="{$day}">{$day} {$time}</label>
-  CDATA;
+    <input type="radio" id={$day} name="day" value={$day} data-pricing={$price} >
+    <label for="{$day}">{$day} {$time}</label>
+    CDATA;
   }
 }
-
-// function validateMovieCode()
-// {
-//   $selectedMovie = getMovie();
-//   global $movies;
-//   $movieIsValid = false;
-//   foreach ($movies as $movieID => $value) {
-
-//       if ($selectedMovie == $value['code']) {
-//       $movieIsValid = true;
-//       echo "MOVIE HAS BEEN FOUND \n";
-//       break;
-
-//     } else {
-//       // header('Location: https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php');
-//       // exit();
-//       echo "MOVIE IS NOT FOUND \n";
-
-//     }
-//   }
-// }
-// <?php validateMovieCode(); 
 
 function validateMovieCode()
 {
@@ -431,6 +401,19 @@ function validateMovieCode()
   }
 }
 
+function validateSessionData()
+{
+  if (!empty($_SESSION)) {
+    echo "STUFF FOUND IN SESSION \n";
+    echo "<br>";
+ //stuff
+
+  } else {
+    echo "no STUFFs FOUNDs IN the SESSION \n";
+    // header('Location: https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php');
+  }
+}
+
 function debugModule()
 {
   echo "<pre id='debug'>";
@@ -440,8 +423,9 @@ function debugModule()
   print_r($_POST);
   echo "SESSION Contains: \n";
   print_r($_SESSION);
-  echo "</pre>";
   printMyCode();
+  echo "</pre>";
+ 
 }
 
 
@@ -466,6 +450,31 @@ function lunardoHeader()
   CDATA;
 }
 
+function companyDetails(){
+  echo "<p>Lunardo Cinema</p> 
+  <ul>
+  <li>EMAIL: lunardo@cinema.com </li> 
+  <li>PH: 1800 555 333</li> 
+  <li>ADDRESS: 180 Main St, Small Country Town</li>
+  <li>QLD, 4000 AUSTRALIA</li>
+  </ul>";
+}
+
+function lunardoFooter()
+{
+  $date = date("Y F d  H:i", filemtime($_SERVER['SCRIPT_FILENAME']));
+  echo <<<"CDATA"
+  <footer id='footer'>
+    <div?>&copy;Lunardo Cinema, EMAIL: lunardo@cinema.com, PH: 1800 555 333, ADDRESS: 180 Main St, Small Country Town, QLD, 4000 AUSTRALIA</div>
+      <div>&copy;<script>
+          document.write(new Date().getFullYear());
+        </script> &copy; Rebecca Watson - s3903758. <a href="https://github.com/Becw36909/wp" target="_blank">Link to GitHub repo.</a></a> Last modified {$date}.</div>
+      <div>Disclaimer: This website is not a real website and is being developed as part of a School of Science Web Programming course at RMIT University in Melbourne, Australia.</div>
+      <div><button id='toggleWireframeCSS' onclick='toggleWireframe()'>Toggle Wireframe CSS</button></div>
+  </footer>
+  CDATA;
+}
+
 // Returns a blank or alternative string if candidate string is unset / undefined
 function unsetFB(&$str, $fallback = '')
 {
@@ -476,26 +485,22 @@ function unsetFB(&$str, $fallback = '')
 //HTML CODE CHECKS I TOOK OUT OF HERE WHEN I WAS PUTTING IN THE PHP CHECKS
 function formData($errors)
 {
-  // print_r($errors);
-  // global $nameError;
-  echo "<br>";
-  // echo $nameError;
-  // $nameError = ' <span style="color:red">' . $errors['user']['name'] . '</span>';
-  $nameError = ' <span >' . unsetFB($errors['user']['name']) . '</span>';
-  $seatError = ' <span >' . unsetFB($errors['seats']) . '<span >';
-  $emailError = ' <span >' . unsetFB($errors['user']['email']) . '<span >';
-  $phoneError = ' <span >' . unsetFB($errors['user']['mobile']) . '<span >';
+  $dayError = ' <span class="span2" >' . unsetFB($errors['day']) . '<span >';
+  $nameError = ' <span class="span2" >' . unsetFB($errors['user']['name']) . '</span>';
+  $seatError = ' <span class="span2" >' . unsetFB($errors['seats']) . '<span >';
+  $emailError = ' <span class="span2">' . unsetFB($errors['user']['email']) . '<span >';
+  $phoneError = ' <span class="span2">' . unsetFB($errors['user']['mobile']) . '<span >';
   $email = unsetFB($_POST['user']['email']);
-  echo "<br>";
-  // echo $nameError;
-  // print_r($errors['user']['name']);
-  echo "<br>";
+  $name = unsetFB($_POST['user']['name']);
+  $phone = unsetFB($_POST['user']['mobile']);
+
   $movieID = getMovie();
   echo <<< CDATA
   <div id="form">
   <form name="bookingForm" method="post" oninput="return logDetails()" onsubmit="return formValidate();">
     <input type="hidden" name="movie" value={$movieID}>
     <h2 class="heading2">Session Day and Time</h2>
+    <p>{$dayError}</p>
     <fieldset>
       <legend>
         <h3>Please choose:</h3>
@@ -507,7 +512,8 @@ function formData($errors)
     <h2 class="heading2">Required Seats:</h2>
     <p>{$seatError}</p>
   CDATA;
-  seatPrices();
+  // seatPrices();
+  seatsSetup();
   echo <<< CDATA
     <h3>Total: <span id=price></price>
       </span></h3>
@@ -515,13 +521,13 @@ function formData($errors)
     <h2 class="heading2">Customer Details </h2>
     </p>
     <p><label for="name">Full Name:</label>{$nameError}</p>
-    <input type="text" id="name" name="user[name]" placeholder="Full Name" />
+    <input type="text" id="name" name="user[name]" placeholder="Full Name" value={$name}/>
     <p id="demo2"></p> 
     <p><label for="email">Email:</label>{$emailError}</p>
     <input type="email" id="email" name="user[email]" placeholder="Email" value={$email} />
     
     <p><label for="mobile">Mobile Number:</label>{$phoneError}</p>
-    <input type="text" id="mobile" name="user[mobile]" placeholder="Mobile Number"  />
+    <input type="text" id="mobile" name="user[mobile]" placeholder="Mobile Number" value={$phone}  />
     
     <p id="demo3"></p>
     <p><input type="submit" value="Submit"></p>
@@ -529,4 +535,3 @@ function formData($errors)
 </div>
 CDATA;
 }
-

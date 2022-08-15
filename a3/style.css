@@ -55,11 +55,11 @@ header {
   background-color: var(--maroon);
 }
 
-span {
-  color:red;
-  font-size: 125%
-  /* font-weight: bold; */
+.span2 {
+  color: red;
+  font-size: 115%;
 }
+
 footer {
   background-color: var(--skyblue);
   color: black;
@@ -68,6 +68,56 @@ footer {
   text-align: center;
   padding-top: 4vh;
   padding-bottom: 4vh;
+}
+
+#debug::-webkit-scrollbar {
+  display: none;
+}
+
+#debug {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+#myCode::-webkit-scrollbar {
+  display: none;
+}
+
+#myCode {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.grid-container-2-column {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-content: space-evenly;
+  /* grid-template-columns: auto auto auto; */
+  gap: 10px;
+  /* background-color: #2196F3; */
+  padding: 10px;
+  box-sizing: border-box;
+  border: 2px solid var(--skyblue);
+}
+.grid-container-2-column > div {
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  /* text-align: left; */
+  padding: 20px 0;
+  font-size: 20px;
+  box-sizing: border-box;
+  border: 2px solid var(--skyblue);
+}
+
+.leftItem {
+  text-align: left;
+}
+
+.rightItem {
+  text-align: right;
+}
+
+.centerItem {
+  text-align: center;
 }
 
 #form {
@@ -109,8 +159,8 @@ nav#topnav {
 }
 
 nav#topnav a.current {
-background-color: var(--maroon);
-transition: 0.3s;
+  background-color: var(--maroon);
+  transition: 0.3s;
 }
 
 /* non-interactive link */
@@ -170,7 +220,7 @@ table th {
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
-  padding-top: 4vh ;
+  padding-top: 4vh;
 }
 
 fieldset {
@@ -354,7 +404,6 @@ select {
   backface-visibility: hidden;
 }
 
-
 .flip-card-front {
   background-color: var(--maroon);
   color: var(--white);
@@ -472,7 +521,6 @@ select {
 }
 
 @media screen and (max-width: 480px) {
-
   header {
     font-size: 125%;
     text-align: center;
@@ -527,6 +575,111 @@ select {
     width: 50%;
     min-height: 40vh;
   }
-
-  
 }
+
+/******** Print versions ********/
+
+@media print {
+  html,
+  body {
+    background: none;
+    min-width: 100%;
+    min-height: 100%;
+    color: #000;
+  }
+  header {
+    font-size: 150%;
+    text-align: center;
+  }
+
+  .heading2 {
+    padding: none;
+
+  }
+
+  /* #utils,
+  body > header,
+  nav,
+  footer {
+    display: none !important; /* Javascript re-styling is messing with this */
+  /* } */
+
+  main > section {
+    margin: 0px;
+    border: solid 2px #ccc;
+    background-color: #fff;
+    page-break-inside: avoid;
+    page-break-after: always;
+  }
+
+  main > section.title {
+    background-color: #000;
+  }
+  main > article > section header {
+    background-color: #ccc;
+  }
+
+  .grid-container-2-column > div {
+    /* background-color: rgba(255, 255, 255, 0.8); */
+    /* text-align: left; */
+    padding: 5px 0;
+    /* font-size: 20px; */
+    box-sizing: border-box;
+    border: 2px solid var(--skyblue);
+  }
+
+  /* modal-block currently over-flowing onto next page. Turning off for the moment. 
+  .modal-block div:nth-child(2) {
+    padding: 0.5em;
+    border:thin dotted #ccc;
+    margin: 0.5em 0;
+    display:block;
+    background: repeating-linear-gradient(
+      45deg,
+      #eee,
+      #eee 5px,
+      #fff 5px,
+      #fff 10px
+    );
+  }
+  
+  .modal-block div:nth-child(2) div {
+    display:none;
+    page-break-after: always;
+  }
+  */
+
+  #debug {
+    display: none;
+  }
+
+  #footer {
+    display: none;
+  }
+
+  img {
+    max-height: 70mm;
+    max-width: 70mm;
+    object-fit: contain;
+  }
+}
+
+@media print and (orientation: landscape) {
+  main > article > section {
+    min-height: 180mm;
+  }
+}
+
+@media print and (orientation: portrait) {
+  main > article > section {
+    min-height: 267mm;
+  }
+}
+
+/* Knockout styles for non-print media */
+/* @media not print {
+  figure {
+    max-width:80%;
+  }
+
+} */

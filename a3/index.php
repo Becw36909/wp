@@ -134,13 +134,7 @@
         <h2>Now Showing</h2>
       </div>
 
-      <!-- <div id="movie-card-container">
-        <div><?php printMoviePanel('ACT'); ?></div>
-        <div><?php printMoviePanel('RMC'); ?></div>
-        <div><?php printMoviePanel('FAM'); ?></div>
-        <div><?php printMoviePanel('AHF'); ?></div>
 
-      </div> -->
 
       <div id="movie-card-container">
       <?php printMoviePanels(); ?>
@@ -151,15 +145,16 @@
 
   </main>
 
-  <footer>
+  <!-- <footer>
     <div?>&copy;Lunardo Cinema, EMAIL: lunardo@cinema.com, PH: 1800 555 333, ADDRESS: 180 Main St, Small Country Town, QLD, 4000 AUSTRALIA</div>
       <div>&copy;<script>
           document.write(new Date().getFullYear());
         </script> &copy; Rebecca Watson - s3903758. <a href="https://github.com/Becw36909/wp" target="_blank">Link to GitHub repo.</a></a> Last modified <?= date("Y F d  H:i", filemtime($_SERVER['SCRIPT_FILENAME'])); ?>.</div>
       <div>Disclaimer: This website is not a real website and is being developed as part of a School of Science Web Programming course at RMIT University in Melbourne, Australia.</div>
       <div><button id='toggleWireframeCSS' onclick='toggleWireframe()'>Toggle Wireframe CSS</button></div>
-  </footer>
-
+  </footer> -->
+  <?php lunardoFooter(); ?>
+  
   <div><?php debugModule(); ?></div>
 
 </body>
