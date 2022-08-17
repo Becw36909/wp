@@ -90,7 +90,7 @@ footer {
 
 .grid-container-2-column {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto 300px;
   align-content: space-evenly;
   /* grid-template-columns: auto auto auto; */
   gap: 10px;
@@ -102,10 +102,30 @@ footer {
 .grid-container-2-column > div {
   /* background-color: rgba(255, 255, 255, 0.8); */
   /* text-align: left; */
+  padding: 5px 0;
+  font-size: 20px;
+  box-sizing: border-box;
+  /* border: 2px solid var(--skyblue); */
+}
+
+.grid-container-3-column {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  align-content: space-evenly;
+  /* grid-template-columns: auto auto auto; */
+  gap: 10px;
+  /* background-color: #2196F3; */
+  padding: 10px;
+  box-sizing: border-box;
+  border: 2px solid var(--skyblue);
+}
+.grid-container-3-column > div {
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  /* text-align: left; */
   padding: 20px 0;
   font-size: 20px;
   box-sizing: border-box;
-  border: 2px solid var(--skyblue);
+  /* border: 2px solid var(--skyblue); */
 }
 
 .leftItem {
@@ -118,6 +138,11 @@ footer {
 
 .centerItem {
   text-align: center;
+}
+
+.ticketDiv {
+  background: url("../../media/lunastar.png") 50% 55% / contain no-repeat;
+  background-position: right;
 }
 
 #form {
@@ -586,6 +611,7 @@ select {
     min-width: 100%;
     min-height: 100%;
     color: #000;
+    font-size: 85%;
   }
   header {
     font-size: 150%;
@@ -594,15 +620,7 @@ select {
 
   .heading2 {
     padding: none;
-
   }
-
-  /* #utils,
-  body > header,
-  nav,
-  footer {
-    display: none !important; /* Javascript re-styling is messing with this */
-  /* } */
 
   main > section {
     margin: 0px;
@@ -622,32 +640,34 @@ select {
   .grid-container-2-column > div {
     /* background-color: rgba(255, 255, 255, 0.8); */
     /* text-align: left; */
-    padding: 5px 0;
+    padding: 0px 0;
     /* font-size: 20px; */
     box-sizing: border-box;
-    border: 2px solid var(--skyblue);
+    /* border: 2px solid var(--skyblue); */
+    page-break-inside: avoid;
+  }
+  .grid-container-3-column > div {
+    /* background-color: rgba(255, 255, 255, 0.8); */
+    /* text-align: left; */
+    padding: 0px 0;
+    /* font-size: 80px; */
+    box-sizing: border-box;
+    /* border: 2px solid var(--skyblue); */
+    page-break-inside: avoid;
   }
 
-  /* modal-block currently over-flowing onto next page. Turning off for the moment. 
-  .modal-block div:nth-child(2) {
-    padding: 0.5em;
-    border:thin dotted #ccc;
-    margin: 0.5em 0;
-    display:block;
-    background: repeating-linear-gradient(
-      45deg,
-      #eee,
-      #eee 5px,
-      #fff 5px,
-      #fff 10px
-    );
+  .grid-container-3-column {
+    page-break-inside: avoid;
   }
-  
-  .modal-block div:nth-child(2) div {
-    display:none;
-    page-break-after: always;
+
+  .grid-container-2-column {
+    page-break-inside: avoid;
   }
-  */
+
+  .ticketDiv {
+    page-break-inside: avoid;
+    font-size: 75%;
+  }
 
   #debug {
     display: none;

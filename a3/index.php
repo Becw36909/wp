@@ -1,4 +1,5 @@
-<?php require_once('tools.php');
+<?php 
+require_once('tools.php');
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +10,7 @@
   <meta charset="utf-8">
   <meta name="author" content="Rebecca Watson">
   <meta name="description" content="Lunardo Cinema">
-  <link rel="stylesheet" href="style.css" type="text/css">
+  <!-- <link rel="stylesheet" href="style.css" type="text/css"> -->
   <link rel="icon" href='../../media/lunastar.png' type="image/x-icon">
   <script src="script.js"></script>
 
@@ -30,7 +31,6 @@
       <h1>LUNARDO Cinema &#x2606</h1>
     </div>
   </header> -->
-
   <?php lunardoHeader(); ?>
 
 

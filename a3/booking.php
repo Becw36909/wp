@@ -1,9 +1,9 @@
-<?php require_once('tools.php');
+<?php 
+require_once('tools.php');
 require_once('post-validation.php');
 validateMovieCode();
-// $fieldErrors = validateBooking();
 $errors = validateBooking();
-print_r($errors);
+// print_r($errors);
 // checkingMovieDays();
 ?>
 
@@ -17,9 +17,9 @@ print_r($errors);
   <meta http-equiv="X-Frame-Options" content="deny">
   <meta name="author" content="Rebecca Watson">
   <meta name="description" content="Lunardo Cinema Booking Page">
-  <link rel="stylesheet" href="style.css" type="text/css">
+  <!-- <link rel="stylesheet" href="style.css" type="text/css"> -->
   <link rel="icon" href='../../media/lunastar.png' type="image/x-icon">
-  <!-- <script src="script.js"></script> -->
+  <script src="script.js"></script>
 
 
   <title>Lunardo Booking Page</title>

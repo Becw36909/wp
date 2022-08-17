@@ -1,6 +1,18 @@
 <?php require_once('tools.php');
-validateSessionData();
-?>
+validateSessionData();?>
+<!-- // echo "SESSION ARRAY BELOW";
+// echo "<br>";
+// print_r($_SESSION);
+// echo "<br>";
+// getPriceType($priceType);
+// echo "<br>";
+// echo "after priceType";
+// echo "<br>";
+// echo "get seat prices";
+// echo "<br>";
+// caculateSeatTotals();
+// getSeatPrices(); -->
+
 
 <!DOCTYPE html>
 <html lang='en'>
@@ -10,11 +22,9 @@ validateSessionData();
   <meta charset="utf-8">
   <meta name="author" content="Rebecca Watson">
   <meta name="description" content="Lunardo Cinema">
-  <link rel="stylesheet" href="style.css" type="text/css">
+  <!-- <link rel="stylesheet" href="style.css" type="text/css"> -->
   <link rel="icon" href='../../media/lunastar.png' type="image/x-icon">
   <!-- <script src="script.js"></script> -->
-
-
 
   <title>Lunardo Cinema Receipt Page</title>
 
@@ -28,41 +38,57 @@ validateSessionData();
 
   <?php lunardoHeader(); ?>
   <main>
-    <section id="companyInfo">
-      <div>
-        <div class="heading2">
-          <h2>Booking Receipt</h2>
-        </div>
-        <div class="grid-container-2-column">
-          <div class="leftItem"><?php companyDetails(); ?></div>
-          <div class="rightItem"><p>Booking Made:</p> <p><?= date("Y-m-d"); ?></p></div>
-          <!-- <div class="centerItem">3</div> -->
-        </div>
+    <section id="receiptDetails">
+
+      <div class="heading2">
+        <h2>Booking Receipt</h2>
       </div>
-      <section id="bookingInfo">
-      <div>
-        <div class="heading2">
-          <h2>Booking Receipt</h2>
+
+      <div class="grid-container-2-column">
+        <div class="leftItem">
+          <h3><?php movieReceiptDetails(); ?></h3>
         </div>
-        <div class="grid-container-2-column">
-          <div class="leftItem"><?php companyDetails(); ?></div>
-          <div class="rightItem"><p>Booking Made:</p> <p><?= date("Y-m-d"); ?></p></div>
-          <!-- <div class="centerItem">3</div> -->
+        <div class="rightItem"></div>
+      </div>
+
+      <div class="grid-container-2-column">
+        <div class="leftItem"><?php companyDetails(); ?></div>
+        <div class="rightItem">
+          <p>Booking Made:</p>
+          <p><?= date("Y-m-d"); ?></p>
         </div>
       </div>
 
+      <div class="grid-container-2-column">
+        <div class="leftItem"><?php getCustomerDetails(); ?></div>
+      </div>
 
+      <div class="grid-container-3-column">
+        <div class="leftItem">Seat Type</div>
+        <div class="centerItem">Quantity</div>
+        <div class="rightItem">Subtotal</div>
+        <?php calculateSeatTotals(); ?>
+      </div>
+
+      <div class="heading2">
+        <h2>Tickets</h2>
+      </div>
+
+      <!-- <div class="grid-container-2-column"> -->
+        <?php printTickets(); ?>
+      <!-- </div> -->
       <div class="flex-container">
-        stuff here
+        <!-- stuff here -->
       </div>
 
     </section>
 
-
   </main>
 
   <?php lunardoFooter(); ?>
-
+  <?php writeBookingToArray(); ?>
+  <?php writeBookingToFile(); ?>
+  
   <div><?php debugModule(); ?></div>
 
 </body>

@@ -2,25 +2,25 @@
 var formTotal; 
 var countErrors=0;
 
-function linkThis() {
-document.write("You are learning how to call JavaScript function in html");
-}
+// function linkThis() {
+// document.write("You are learning how to call JavaScript function in html");
+// }
 
-function innerChange() {
-    document.getElementById("inner").innerHTML = "I have changed!";
-}
-function alertBox() {
-    alert("Hello! I am an alert box!");
-}
+// function innerChange() {
+//     document.getElementById("inner").innerHTML = "I have changed!";
+// }
+// function alertBox() {
+//     alert("Hello! I am an alert box!");
+// }
 
 
 function nameCheck() {
   const nameRegex = new RegExp(/^[A-Za-z \-'.Æ]{1,127}$/);
-  document.getElementById("demo2").innerHTML = "Name being checked ";
+  // document.getElementById("demo2").innerHTML = "Name being checked ";
   var name=getid("name").value;
   if (nameRegex.test(name))
   {
-    alert("Valid name!");
+    // alert("Valid name!");
     console.log("name checked ok");
     return true;
   }
@@ -37,11 +37,11 @@ function nameCheck() {
 
 function phoneNumberCheck() {
   const phRegex = new RegExp(/^(\(04\)|04|\+614)( ?\d){8}$/); 
-  document.getElementById("demo3").innerHTML = "Number being checked ";
+  // document.getElementById("demo3").innerHTML = "Number being checked ";
   var mobile=getid("mobile").value;
   if (phRegex.test(mobile))
   {
-    alert("Valid number!");
+    // alert("Valid number!");
     console.log("number checked ok");
     return true;
   }
@@ -96,7 +96,7 @@ function phoneNumberCheck() {
   // This is where it all happens!
   function formValidate() {
     //clearErrors();
-    alert("You pressed submit");
+    // alert("You pressed submit");
   // var countErrors=0;
   // if (total > 0){
   //   return true;

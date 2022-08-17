@@ -1,20 +1,33 @@
 <?php
 session_start();
 
-/* Put your PHP functions and modules here.
-   Many will be provided in the teaching materials,
-   keep a look out for them!
-*/
-$indexPage = "https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php";
-$receiptPage = "https://titan.csit.rmit.edu.au/~s3903758/wp/a3/receipt.php";
+// declaring some variables to use throughout the document
+// $indexPage = "https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php";
+// $receiptPage = "https://titan.csit.rmit.edu.au/~s3903758/wp/a3/receipt.php";
 $dayError = '';
 $seatError = '';
 $emailError = '';
 $nameError = '';
 $phoneError = '';
-$price;
+$priceType;
+$finalGST;
+$finalTotal;
 
+// getting the current priceType (disc or full) for seats set by user choice of movie day/time
+function getPriceType($priceType)
+{
+  echo $priceType;
+}
 
+// prints out seat prices according to the pricingArr 
+function getSeatPrices()
+{
+  global $pricingArr;
+  global $priceType;
+  echo $priceType;
+}
+
+// setting up each movie object
 $movies = [
   'ACT' =>  [
     'code' => "ACT",
@@ -38,6 +51,7 @@ $movies = [
       'Monday' => '9pm',
       'Tuesday' => '9pm',
       'Wednesday' => '9pm',
+      'Thursday' => '9pm',
       'Friday' =>  '9pm',
       'Saturday' => '6pm',
       'Sunday' => '6pm'
@@ -61,6 +75,7 @@ $movies = [
     'run-time' => '115 mins',
     'movie-times' => [
       'Wednesday' => '12pm',
+      'Thursday' => '12pm',
       'Friday' =>  '12pm',
       'Saturday' => '3pm',
       'Sunday' => '3pm'
@@ -84,6 +99,7 @@ $movies = [
       'Monday' => '12pm',
       'Tuesday' => '12pm',
       'Wednesday' => '6pm',
+      'Thursday' => '6pm',
       'Friday' =>  '6pm',
       'Saturday' => '12pm',
       'Sunday' => '12pm'
@@ -113,18 +129,19 @@ $movies = [
 ];
 
 
-
+// checking movie day and time according to a user chosen movie with movieId/code
 function checkingMovieDays()
 {
   $movieID = getMovie();
   global $movies;
   foreach ($movies[$movieID]['movie-times'] as $day => $time) {
-    echo $day;
+    echo $day . 'and ' . $time;
     echo "<br>";
     echo "<br>";
   }
 }
 
+// prints only movie day and times for the flip panels according to the movie objects
 function printPanelMovieTimes($movieID)
 {
   global $movies;
@@ -135,19 +152,14 @@ function printPanelMovieTimes($movieID)
   }
 }
 
-function setSelected(&$str, $val)
-{
-  return (isset($str) && $str == $val ? 'selected' : '');
-}
-
-
+// seats object for seat quantities only with value => name
 $seats = [
   '' => 'Please Select', 1 => '1', 2 => '2', 3 => '3',
   4 => '4', 5 => '5', 6 => '6', 7 => '7',
   8 => '8', 9 => '9', 10 => '10'
 ];
 
-
+// sets up seat select boxes with seat object
 function seatNumbers()
 {
   global $seats;
@@ -171,55 +183,51 @@ function seatNumbers()
   // CDATA;
 }
 
+// sets up a pricing array for seats according to code with 
+// disc and full prices and names of seats
 $pricingArr = [
   'STA' => [
     'discprice' => '15.00',
     'fullprice' => '20.50',
-    'name' => "Standard Adult",
-    'id' => "standard-adult"
+    'name' => "Standard Adult"
   ],
   'STP' => [
     'discprice' => '13.50',
     'fullprice' => '18.00',
-    'name' => "Standard Concession",
-    'id' => "standard-conc"
+    'name' => "Standard Concession"
   ],
   'STC' => [
     'discprice' => '12.00',
     'fullprice' => '16.50',
-    'name' => "Standard Child",
-    'id' => "standard-child"
+    'name' => "Standard Child"
   ],
   'FCA' => [
     'discprice' => '24.00',
     'fullprice' => '30.00',
-    'name' => "First Class Adult",
-    'id' => "first-class-adult"
+    'name' => "First Class Adult"
   ],
   'FCP' => [
     'discprice' => '22.50',
     'fullprice' => '27.00',
-    'name' => "First Class Concession",
-    'id' => "first-class-conc"
+    'name' => "First Class Concession"
   ],
   'FCC' => [
     'discprice' => '21.00',
     'fullprice' => '24.00',
-    'name' => "First Class Child",
-    'id' => "first-class-child"
+    'name' => "First Class Child"
   ],
 ];
 
-
+// sets up and prints out each seat in pricing array with seat selects
 function seatsSetup()
 {
   global $pricingArr;
-  global $price;
+  // global $priceType;
   foreach ($pricingArr as $seatType => $value) {
-
     echo <<<"CDATA"
     <h3>{$pricingArr[$seatType]['name']}</h3>
-    <select name='seats[{$seatType}]' class='seat-select' data-fullprice={$pricingArr[$seatType]['fullprice']} data-discprice={$pricingArr[$seatType]['discprice']}>
+    <select name='seats[{$seatType}]' class='seat-select' data-fullprice={$pricingArr[$seatType]['fullprice']} 
+    data-discprice={$pricingArr[$seatType]['discprice']}>
  CDATA;
     seatNumbers();
     echo <<<"CDATA"
@@ -227,6 +235,12 @@ function seatsSetup()
 CDATA;
   }
 }
+
+// foreach ($_POST['seats'] as $class => $amount) {
+//   $seatInt = is_numeric($amount) ? "True" : "False";
+//   echo $seatInt;
+//   echo "<br>";
+// }
 
 // function seatPrices()
 // {
@@ -270,7 +284,7 @@ CDATA;
 // CDATA;
 // }
 
-
+// prints each movie flip panel according to the movie objects in the movie array
 function printMoviePanels()
 {
   global $movies;
@@ -310,8 +324,7 @@ function printMoviePanels()
   }
 }
 
-
-
+// puts movie info in the booking page according to the user chosen movie (by movieID/code)
 function getMovieData()
 {
   $movieID = getMovie();
@@ -340,34 +353,45 @@ function getMovieData()
  CDATA;
 }
 
-//get rid of the echo when tidying up
+// get's the movieID to match info to in booking page from GET array when 
+// user moves from index to booking page, also put in the POST array with the
+// hidden movie field
+// get rid of the echo when tidying up
 function getMovie()
 {
-  echo $_GET['movie'];
+  // echo $_GET['movie'];
   return $_GET['movie'];
 }
 
+// yet to be used - want to use it for preselecting form elements
+function setSelected(&$str, $val)
+{
+  return (isset($str) && $str == $val ? 'selected' : '');
+}
+
+// yet to be used - want to use it for prechecking form elements
 function setChecked(&$str, $val)
 {
   return (isset($str) && $str == $val ? 'checked' : '');
 }
 
+// creates radio buttons for booking page with movie day/time according to user chosen movieID
 function createRadioButtons()
 {
   $movieID = getMovie();
   global $movies;
-  $price = '';
+  global $priceType;
   foreach ($movies[$movieID]['movie-times'] as $day => $time) {
     // if ($day == 'Monday' || $time == '12pm') {
     // $checkedDay = setChecked($_POST['day'], $day);
-    global $price;
-    $checkedDay = '';
+    // global $priceType;
+    // $checkedDay = '';
     if ($day == 'Monday' || $time == '12pm' && ($day != 'Saturday' && $day != 'Sunday')) {
-      $price = "discprice";
+      $priceType = "discprice";
       // } elseif (($time == '12pm') && ($day != 'Saturday' && $day != 'Sunday')) {
       //   $price = "discpriceprice";
     } else {
-      $price = "fullprice";
+      $priceType = "fullprice";
     }
     //   if ($_POST['day'] == $day) {
     //     $checkedDay = 'checked';
@@ -379,41 +403,45 @@ function createRadioButtons()
 
     // echo $price;
     echo <<<"CDATA"
-    <input type="radio" id={$day} name="day" value={$day} data-pricing={$price} >
+    <input type="radio" id={$day} name="day" value={$day} data-pricing={$priceType} >
     <label for="{$day}">{$day} {$time}</label>
     CDATA;
+    // getPriceType($priceType);
   }
 }
 
+// called on the booking page and checks the movie code in the header when user is
+// moving from index page to booking page. 
+// if valid according to movie array objects, otherwise redirects to index page 
 function validateMovieCode()
 {
   $selectedMovie = getMovie();
   global $movies;
   // if (in_array($selectedMovie, $movies)) {
   if (array_key_exists($selectedMovie, $movies)) {
-
-    echo "MOVIE FOUND \n";
+    // echo "MOVIE FOUND \n";
   } else {
-    header('Location: https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php');
+    header("Location: https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php");
     exit();
     // echo "MOVIE NOT FOUND \n";
-
   }
 }
 
+// validates SESSION has data inside for acces to the receipt page
+// if no SESSION data, user is redirected to index page
 function validateSessionData()
 {
   if (!empty($_SESSION)) {
-    echo "STUFF FOUND IN SESSION \n";
-    echo "<br>";
- //stuff
-
+    // echo "STUFF FOUND IN SESSION \n";
+    // echo "<br>";
   } else {
     echo "no STUFFs FOUNDs IN the SESSION \n";
-    // header('Location: https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php');
+    // header("Location: https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php");
+    // exit();
   }
 }
 
+// shows what is in each GET, POST and SESSION array according to user inputs
 function debugModule()
 {
   echo "<pre id='debug'>";
@@ -425,10 +453,9 @@ function debugModule()
   print_r($_SESSION);
   printMyCode();
   echo "</pre>";
- 
 }
 
-
+// prints each line of current code according to the page currently on
 function printMyCode()
 {
   $allLinesOfCode = file($_SERVER['SCRIPT_FILENAME']);
@@ -439,6 +466,7 @@ function printMyCode()
   echo "</ol></pre>";
 }
 
+// company header for each page where needed
 function lunardoHeader()
 {
   echo <<<"CDATA"
@@ -450,7 +478,9 @@ function lunardoHeader()
   CDATA;
 }
 
-function companyDetails(){
+// prints out company details
+function companyDetails()
+{
   echo "<p>Lunardo Cinema</p> 
   <ul>
   <li>EMAIL: lunardo@cinema.com </li> 
@@ -460,6 +490,7 @@ function companyDetails(){
   </ul>";
 }
 
+// footer for each page where needed
 function lunardoFooter()
 {
   $date = date("Y F d  H:i", filemtime($_SERVER['SCRIPT_FILENAME']));
@@ -481,10 +512,13 @@ function unsetFB(&$str, $fallback = '')
   return (isset($str) ? $str : $fallback);
 }
 
-//GO AND GET THE CORRECT LINES FROM BOOKING.PHP TO PUT BACK IN THE JS AND
-//HTML CODE CHECKS I TOOK OUT OF HERE WHEN I WAS PUTTING IN THE PHP CHECKS
+// GO AND GET THE CORRECT LINES FROM BOOKING.PHP TO PUT BACK IN THE JS AND
+// HTML CODE CHECKS I TOOK OUT OF HERE WHEN I WAS PUTTING IN THE PHP CHECKS
+// sets up the booking page form with necessary radio buttons, seat selects and
+// text fields for user inputs. Also sets up and displays user feedback for any form errors. 
 function formData($errors)
 {
+  // spans for displaying user form errors if any
   $dayError = ' <span class="span2" >' . unsetFB($errors['day']) . '<span >';
   $nameError = ' <span class="span2" >' . unsetFB($errors['user']['name']) . '</span>';
   $seatError = ' <span class="span2" >' . unsetFB($errors['seats']) . '<span >';
@@ -495,6 +529,7 @@ function formData($errors)
   $phone = unsetFB($_POST['user']['mobile']);
 
   $movieID = getMovie();
+  // <form action="booking.php" method='get'>
   echo <<< CDATA
   <div id="form">
   <form name="bookingForm" method="post" oninput="return logDetails()" onsubmit="return formValidate();">
@@ -503,7 +538,7 @@ function formData($errors)
     <p>{$dayError}</p>
     <fieldset>
       <legend>
-        <h3>Please choose:</h3>
+      Please choose:
       </legend>
   CDATA;
   createRadioButtons();
@@ -521,17 +556,286 @@ function formData($errors)
     <h2 class="heading2">Customer Details </h2>
     </p>
     <p><label for="name">Full Name:</label>{$nameError}</p>
-    <input type="text" id="name" name="user[name]" placeholder="Full Name" value={$name}/>
+    <input type="text" id="name" name="user[name]" placeholder="Full Name" value="{$name}"/>
     <p id="demo2"></p> 
     <p><label for="email">Email:</label>{$emailError}</p>
-    <input type="email" id="email" name="user[email]" placeholder="Email" value={$email} />
-    
+    <input type="email" id="email" name="user[email]" placeholder="Email" value="{$email}" />
     <p><label for="mobile">Mobile Number:</label>{$phoneError}</p>
-    <input type="text" id="mobile" name="user[mobile]" placeholder="Mobile Number" value={$phone}  />
-    
+    <input type="text" id="mobile" name="user[mobile]" placeholder="Mobile Number" value="$phone"  />
     <p id="demo3"></p>
     <p><input type="submit" value="Submit"></p>
   </form>
-</div>
+  </div>
 CDATA;
 }
+
+// gets customer details from SESSION and prints them out for receipt
+function getCustomerDetails()
+{
+  if (!empty($_SESSION)) {
+    echo "<p>Customer Details</p> 
+    <ul>
+    <li>Name: {$_SESSION['user']['name']}</li>
+    <li>EMAIL: {$_SESSION['user']['email']} </li> 
+    <li>PH: {$_SESSION['user']['mobile']}</li> 
+    </ul>";
+  }
+}
+
+// gets movie details according to movieID and prints out
+function movieReceiptDetails()
+{
+  global $movies;
+  $movieDay = $_SESSION['day'];
+  $movieID = $_SESSION['movie'];
+  if (!empty($_SESSION)) {
+    $movieTime = $movies[$movieID]['movie-times'][$movieDay];
+    echo "<h3>{$movies[$movieID]['title']} - $movieDay, $movieTime </h3>";
+  }
+}
+
+// setting up some arrays to use for booking details and seat prices/quantities
+$now = date('d/m h:i');
+$bookedSeats = [];
+$bookedSeatPrices = [];
+$totalBookingPrices = [];
+$bookingDetails = [];
+$tickets = []; 
+
+// below used to just echo out the state/what is inside of the arrays when function is called
+function echoSeats()
+{
+  global $bookedSeats;
+  global $bookedSeatPrices;
+  global $totalBookingPrices;
+  global $bookingDetails;
+  // print_r($bookedSeats);
+  // print_r($bookedSeatPrices);
+  // print_r($totalBookingPrices);
+  print_r($bookingDetails);
+}
+
+// finds the correct seat prices according to movieID day/time (disc or full)
+// and calculates per quantity, printing out to receipt page inc GST cost
+function calculateSeatTotals()
+{
+  global $movies;
+  global $pricingArr;
+  global $bookedSeats;
+  global $bookedSeatPrices;
+  global $totalBookingPrices;
+
+  if (!empty($_SESSION)) {
+    $movieID = $_SESSION['movie'];
+    $movieDay = $_SESSION['day'];
+    $movieTime = $movies[$movieID]['movie-times'][$movieDay];
+    if ($movieDay == 'Monday' || ($movieDay != 'Saturday' && $movieDay != 'Sunday') && $movieTime == '12pm') {
+      $priceType = "discprice";
+    } else {
+      $priceType = "fullprice";
+    }
+    $totalPrice = 0;
+    foreach ($_SESSION['seats'] as $seatType => $quantity) {
+      if ($quantity > 0) {
+        $subTotal = $quantity * $pricingArr[$seatType][$priceType];
+        $totalPrice += $subTotal;
+        $subTotalFloat = "$" . number_format($subTotal, 2);
+        echo <<< CDATA
+        <div class="leftItem">{$pricingArr[$seatType]['name']} Type</div>
+        <div class="centerItem">{$quantity}</div>
+        <div class="rightItem">{$subTotalFloat}</div>
+    CDATA;
+      } else $subTotalFloat = '';
+      $bookedSeats += [$seatType => $quantity];
+      $bookedSeatPrices += [$seatType => $subTotalFloat];
+    }
+
+    $calculateGST = $totalPrice / 11;
+    $finalGST = "$" . number_format($calculateGST, 2);
+    $finalTotal = "$" . number_format($totalPrice, 2);
+    echo <<< CDATA
+    <div class="leftItem"> </div>
+    <div class="rightItem"><p>GST Included</p>
+    <p>{$finalGST}</p></div>
+    <div class="rightItem"><p>Total Price</p>
+    <p><h3>{$finalTotal}</h3></p></div>
+    </div>
+CDATA;
+    $totalBookingPrices += [$finalTotal, $finalGST];
+  }
+}
+
+// prints movie tickets with according to movieID and seats chosen
+function printTickets()
+{
+  global $movies;
+  global $pricingArr;
+  global $bookedSeats;
+  global $bookedSeatPrices;
+  $movieID = $_SESSION['movie'];
+  $movieDay = $_SESSION['day'];
+  $movieTime = $movies[$movieID]['movie-times'][$movieDay];
+
+  // maybe a 2 column grid??
+  foreach ($_SESSION['seats'] as $seatType => $quantity) {
+    if ($quantity > 0) {
+      for ($q = 1; $q <= $quantity; $q++){
+        echo <<< CDATA
+        <div class="grid-container-2-column">
+        <div class="leftItem ticketDiv">
+        <h3>{$movies[$movieID]['title']} - $movieDay, $movieTime </h3>
+        <ul> 
+        <li>LUNARDO CINEMA</li>
+        <li>{$pricingArr[$seatType]['name']}</li>
+        </ul>
+        </div>
+        <div class="rightItem">
+        <p>Admit</p> 
+        <p>x1</p>
+        <p>{$pricingArr[$seatType]['name']}</p>
+        </div>
+        </div>
+    CDATA;
+      }
+      // foreach ($quantity as $seat) {
+    //     echo <<< CDATA
+    //     <div class="grid-container-2-column">
+    //     <div class="leftItem ticketDiv">
+    //     <h3>{$movies[$movieID]['title']} - $movieDay, $movieTime </h3>
+    //     <ul> 
+    //     <li>LUNARDO CINEMA</li>
+    //     <li>{$pricingArr[$seatType]['name']}</li>
+    //     </ul>
+    //     </div>
+    //     <div class="rightItem">
+    //     <p>Admit</p> 
+    //     <p>x1</p>
+    //     <p>{$pricingArr[$seatType]['name']}</p>
+    //     </div>
+    //     </div>
+    // CDATA;
+      // }
+    }
+  }
+}
+
+// checks current state of variables
+// function checkTotals()
+// {
+//   global $finalGST;
+//   global $finalTotal;
+//   echo "price totals here ";
+//   echo $finalGST;
+//   echo $finalTotal;
+// }
+
+// writes all booking details to an array ready to write to a file
+function writeBookingToArray()
+{
+  global $now;
+  global $totalBookingPrices;
+  global $bookedSeats;
+  global $bookedSeatPrices;
+  global $movies;
+  global $bookingDetails;
+  $movieID = $_SESSION['movie'];
+  $movieDay = $_SESSION['day'];
+  $movieTime = $movies[$movieID]['movie-times'][$movieDay];
+
+  $bookingDetails = [
+    'orderDate' => $now,
+    'username' => $_SESSION['user']['name'],
+    'email' => $_SESSION['user']['email'],
+    'mobile' => $_SESSION['user']['mobile'],
+    'movieCode' => $_SESSION['movie'],
+    'day' => $_SESSION['day'],
+    'time' => $movieTime,
+    'STAquantity' => $bookedSeats['STA'],
+    'STAprice' => $bookedSeatPrices['STA'],
+    'STPquantity' => $bookedSeats['STP'],
+    'STPprice' => $bookedSeatPrices['STP'],
+    'STCquantity' => $bookedSeats['STC'],
+    'STCprice' => $bookedSeatPrices['STC'],
+    'FCAquantity' => $bookedSeats['FCA'],
+    'FCAprice' => $bookedSeatPrices['FCA'],
+    'FCPquantity' => $bookedSeats['FCP'],
+    'FCPprice' => $bookedSeatPrices['FCP'],
+    'FCCquantity' => $bookedSeats['FCC'],
+    'FCCprice' => $bookedSeatPrices['FCC'],
+    'total' => $totalBookingPrices[0],
+    'GST' => $totalBookingPrices[1]
+  ];
+  // echo 'booking details here';
+  // print_r($bookingDetails) ;
+  return $bookingDetails;
+}
+
+// writes all booking details to a string ready to write to a file
+// function writeBookingToString()
+// {
+//   global $bookingDetails;
+//   global $totalBookingPrices;
+//   global $bookedSeats;
+//   global $bookedSeatPrices;
+//   global $movies;
+//   $movieID = $_SESSION['movie'];
+//   $movieDay = $_SESSION['day'];
+//   $movieTime = $movies[$movieID]['movie-times'][$movieDay];
+//   $bookingString = "$bookingDetails[0], 
+//   {$_SESSION['user']['name']},
+//   {$_SESSION['user']['email']},
+//   {$_SESSION['user']['mobile']},
+//   {$_SESSION['movie']},
+//   {$_SESSION['day']},
+//   $movieTime,
+//   {$bookedSeats['STA']},
+//   {$bookedSeatPrices['STA']},
+//   {$bookedSeats['STP']},
+//   {$bookedSeatPrices['STP']},
+//   {$bookedSeats['STC']},
+//   {$bookedSeatPrices['STC']},
+//   {$bookedSeats['FCA']},
+//   {$bookedSeatPrices['FCA']},
+//   {$bookedSeats['FCP']},
+//   {$bookedSeatPrices['FCP']},
+//   {$bookedSeats['FCC']},
+//   {$bookedSeatPrices['FCC']},
+//   {$totalBookingPrices[0]},
+//   {$totalBookingPrices[1]} ";
+//   return $bookingString;
+//   // echo $bookingString;
+// }
+
+// writes booking details array to a file
+function writeBookingToFile()
+{
+  global $bookingDetails;
+  // $bookingString = writeBookingToString();
+  // print_r (explode(",",$bookingString ));
+  // $bookingStringArr = (explode(",", $bookingString));
+  // echo $bookingString;
+  // $filename = 'bookings.txt';
+  // if (($fp = fopen($filename, "a")) && flock($fp, LOCK_EX) !== false) {
+  //   // Note: Appending assumes headings are already present!
+  //   foreach ($bookingDetails as $record => $details) {
+  //     fputcsv($fp, $details);
+  //   }
+  //   // file_put_contents($filename, $bookingString, LOCK_EX | FILE_APPEND);
+
+  //   flock($fp, LOCK_UN);
+  //   fclose($fp);
+  // };
+
+  // make array of just the values from booking details to send to text file
+  $detailsForCSV = array_values($bookingDetails);
+  // Open the file for appending
+  $bookingsFile = fopen('bookings.txt', 'a');
+  //  Add the Array to the file using fputcsv()
+  fputcsv($bookingsFile, $detailsForCSV);
+  // Close the file
+  fclose($bookingsFile);
+}
+
+// bookings.txt headings for reference:
+// Order Date-Name-Email-Mobile-Movie Code-Day of Movie-Time of Movie-
+// # STA-$ STA-# STP-$ STP-# STC-$ STC-# FCA- $ FCA-# FCP-$ FCP-# FCC-$ FCC-Total-GST 
