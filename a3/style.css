@@ -628,6 +628,7 @@ select {
     color: #000;
     font-size: 85%;
   }
+  
   header {
     font-size: 150%;
     text-align: center;
@@ -637,6 +638,9 @@ select {
     padding: none;
   }
 
+  div {
+    page-break-inside: avoid;
+  }
   /* main > section {
     margin: 0px;
     border: solid 2px #ccc;
@@ -657,7 +661,7 @@ select {
     /* font-size: 20px; */
     box-sizing: border-box;
     /* border: 2px solid var(--skyblue); */
-    page-break-inside: avoid;
+    /* page-break-inside: avoid; */
   }
 
   .grid-container-3-column > div {
@@ -665,8 +669,8 @@ select {
     /* font-size: 80px; */
     box-sizing: border-box;
     /* border: 2px solid var(--skyblue); */
-    page-break-inside: avoid;
-    page-break-after: always;
+    /* page-break-inside: avoid;
+    page-break-after: always; */
   }
 
   .grid-container-3-column {
@@ -674,16 +678,17 @@ select {
     page-break-after: always;
   }
 
-  .grid-container-2-column {
+  /* .grid-container-2-column {
     page-break-inside: avoid;
-  }
+  } */
 
-  .tickets-page {
+  /* .tickets-page {
     display: block;
-  }
+  } */
 
   .ticket-container {
     /* page-break-after: always; */
+    display: block;
     page-break-inside: avoid;
     box-sizing: border-box;
     border: 2px solid var(--skyblue);

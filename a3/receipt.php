@@ -73,19 +73,19 @@ validateSessionData(); ?>
 
     </section>
     <section id="tickets">
-      <div class="tickets-page">
-        <div class="heading2">
-          <h2>Tickets</h2>
-        </div>
+      <!-- <div class="tickets-page"> -->
+      <div class="heading2">
+        <h2>Tickets</h2>
+      </div>
 
 
 
-        <!-- <div class="tickets-container"> -->
-        <?php printTickets(); ?>
-        <?php writeBookingToArray(); ?>
-        <?php writeBookingToFile(); ?>
-        <!-- </div> -->
-        <!-- <div class="ticket-container">
+      <!-- <div class="tickets-container"> -->
+      <?php printTickets(); ?>
+      <?php writeBookingToArray(); ?>
+      <?php writeBookingToFile(); ?>
+      <!-- </div> -->
+      <!-- <div class="ticket-container">
         <div class="grid-container-2-column">
         <div class="leftItem ticketDiv">
         <h3>{$movies[$movieID]['title']} - $movieDay, $movieTime </h3>
@@ -106,9 +106,7 @@ validateSessionData(); ?>
 
 
 
-
-
-      </div>
+      <!-- </div> -->
     </section>
     <div class="flex-container">
       <!-- stuff here -->
