@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once('tools.php');
 require_once('post-validation.php');
 validateMovieCode();
@@ -47,14 +47,14 @@ $errors = validateBooking();
       <?php getMovieData(); ?>
 
       <?php formData($errors); ?>
-   
+
     </section>
 
   </main>
   <?php lunardoFooter(); ?>
 
-<?php debugModule(); ?>
-      </pre>
+  <?php debugModule(); ?>
+  </pre>
   </aside>
 </body>
 

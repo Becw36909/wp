@@ -160,10 +160,12 @@ $seats = [
 ];
 
 // sets up seat select boxes with seat object
+// decided to run this code at the same time below in seatsSetup()
 function seatNumbers()
 {
   global $seats;
   foreach ($seats as $value => $name) {
+    // $selectedSeat = setSelected($_POST['seats'][$seatType], $value);
     echo <<<"CDATA"
   <option value={$value}>{$name}</option>
   CDATA;
@@ -218,18 +220,34 @@ $pricingArr = [
   ],
 ];
 
-// sets up and prints out each seat in pricing array with seat selects
+// $selectedSeat = setChecked($_POST['seats'][$seatType], $day);
+
+// yet to be used - want to use it for preselecting seats in form
+function setSelected(&$str, $val)
+{
+  return (isset($str) && $str == $val ? 'selected' : '');
+}
+
+// sets up and prints out each seat in pricing array with details and seat select options
 function seatsSetup()
 {
   global $pricingArr;
   // global $priceType;
-  foreach ($pricingArr as $seatType => $value) {
+  foreach ($pricingArr as $seatType => $details) {
     echo <<<"CDATA"
     <h3>{$pricingArr[$seatType]['name']}</h3>
     <select name='seats[{$seatType}]' class='seat-select' data-fullprice={$pricingArr[$seatType]['fullprice']} 
     data-discprice={$pricingArr[$seatType]['discprice']}>
  CDATA;
-    seatNumbers();
+    // seatNumbers();
+    global $seats;
+    foreach ($seats as $value => $name) {
+      $selectedSeat = setSelected($_POST['seats'][$seatType], $value);
+      // <option value={$value} {$selectedSeat} >{$name} </option>
+      echo <<<"CDATA"
+    <option $selectedSeat value={$value} >{$name} </option>
+    CDATA;
+    }
     echo <<<"CDATA"
 </select>
 CDATA;
@@ -360,16 +378,13 @@ function getMovieData()
 function getMovie()
 {
   // echo $_GET['movie'];
-  return $_GET['movie'];
+  $movie = "";
+  if (!empty($_GET['movie'])) $movie = $_GET['movie'];
+  return $movie;
+  // return $_GET['movie'];
 }
 
-// yet to be used - want to use it for preselecting form elements
-function setSelected(&$str, $val)
-{
-  return (isset($str) && $str == $val ? 'selected' : '');
-}
-
-// yet to be used - want to use it for prechecking form elements
+// used for giving a radio button for a day 'checked' if form data has errors
 function setChecked(&$str, $val)
 {
   return (isset($str) && $str == $val ? 'checked' : '');
@@ -382,6 +397,7 @@ function createRadioButtons()
   global $movies;
   global $priceType;
   foreach ($movies[$movieID]['movie-times'] as $day => $time) {
+    $checkedDay = setChecked($_POST['day'], $day);
     // if ($day == 'Monday' || $time == '12pm') {
     // $checkedDay = setChecked($_POST['day'], $day);
     // global $priceType;
@@ -403,7 +419,7 @@ function createRadioButtons()
 
     // echo $price;
     echo <<<"CDATA"
-    <input type="radio" id={$day} name="day" value={$day} data-pricing={$priceType} >
+    <input type="radio" id={$day} name="day" value={$day} {$checkedDay} data-pricing={$priceType} >
     <label for="{$day}">{$day} {$time}</label>
     CDATA;
     // getPriceType($priceType);
@@ -421,8 +437,9 @@ function validateMovieCode()
   if (array_key_exists($selectedMovie, $movies)) {
     // echo "MOVIE FOUND \n";
   } else {
-    header("Location: https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php");
-    exit();
+    // header("Location: https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php");
+    // exit();
+    header("Location: index.php");
     // echo "MOVIE NOT FOUND \n";
   }
 }
@@ -435,7 +452,8 @@ function validateSessionData()
     // echo "STUFF FOUND IN SESSION \n";
     // echo "<br>";
   } else {
-    echo "no STUFFs FOUNDs IN the SESSION \n";
+    // echo "no STUFFs FOUNDs IN the SESSION \n";
+    header("Location: index.php");
     // header("Location: https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php");
     // exit();
   }
@@ -556,12 +574,12 @@ function formData($errors)
     <h2 class="heading2">Customer Details </h2>
     </p>
     <p><label for="name">Full Name:</label>{$nameError}</p>
-    <input type="text" id="name" name="user[name]" placeholder="Full Name" value="{$name}"/>
+    <input type="text" id="name" name="user[name]" placeholder="Full Name" value="{$name}" required onchange="nameCheck()"/>
     <p id="demo2"></p> 
     <p><label for="email">Email:</label>{$emailError}</p>
-    <input type="email" id="email" name="user[email]" placeholder="Email" value="{$email}" />
+    <input type="email" id="email" name="user[email]" placeholder="Email" value="{$email}" required />
     <p><label for="mobile">Mobile Number:</label>{$phoneError}</p>
-    <input type="text" id="mobile" name="user[mobile]" placeholder="Mobile Number" value="$phone"  />
+    <input type="text" id="mobile" name="user[mobile]" placeholder="Mobile Number" value="$phone"  required onchange="phoneNumberCheck()" />
     <p id="demo3"></p>
     <p><input type="submit" value="Submit"></p>
   </form>
@@ -600,7 +618,7 @@ $bookedSeats = [];
 $bookedSeatPrices = [];
 $totalBookingPrices = [];
 $bookingDetails = [];
-$tickets = []; 
+$tickets = [];
 
 // below used to just echo out the state/what is inside of the arrays when function is called
 function echoSeats()
@@ -679,10 +697,11 @@ function printTickets()
   // maybe a 2 column grid??
   foreach ($_SESSION['seats'] as $seatType => $quantity) {
     if ($quantity > 0) {
-      for ($q = 1; $q <= $quantity; $q++){
+      for ($q = 1; $q <= $quantity; $q++) {
         echo <<< CDATA
+        <div class="ticket-container">
         <div class="grid-container-2-column">
-        <div class="leftItem ticketDiv">
+        <div class="leftItem ticket-div">
         <h3>{$movies[$movieID]['title']} - $movieDay, $movieTime </h3>
         <ul> 
         <li>LUNARDO CINEMA</li>
@@ -695,26 +714,27 @@ function printTickets()
         <p>{$pricingArr[$seatType]['name']}</p>
         </div>
         </div>
+        </div>
+        <div>
+        </div>
     CDATA;
       }
-      // foreach ($quantity as $seat) {
-    //     echo <<< CDATA
-    //     <div class="grid-container-2-column">
-    //     <div class="leftItem ticketDiv">
-    //     <h3>{$movies[$movieID]['title']} - $movieDay, $movieTime </h3>
-    //     <ul> 
-    //     <li>LUNARDO CINEMA</li>
-    //     <li>{$pricingArr[$seatType]['name']}</li>
-    //     </ul>
-    //     </div>
-    //     <div class="rightItem">
-    //     <p>Admit</p> 
-    //     <p>x1</p>
-    //     <p>{$pricingArr[$seatType]['name']}</p>
-    //     </div>
-    //     </div>
-    // CDATA;
-      // }
+
+      // <div class="ticket-container">
+      // <div class="left-item ticket-div">
+      // <h3>{$movies[$movieID]['title']} - $movieDay, $movieTime </h3>
+      // <ul> 
+      // <li>LUNARDO CINEMA</li>
+      // <li>{$pricingArr[$seatType]['name']}</li>
+      // </ul>
+      // </div>
+      // <div >
+      // <p>Admit</p> 
+      // <p>x1</p>
+      // <p>{$pricingArr[$seatType]['name']}</p>
+      // </div>
+      // </div>
+
     }
   }
 }

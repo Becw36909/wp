@@ -140,10 +140,25 @@ footer {
   text-align: center;
 }
 
-.ticketDiv {
+.ticket-div {
   background: url("../../media/lunastar.png") 50% 55% / contain no-repeat;
   background-position: right;
 }
+
+.left-item {
+  flex-grow: 7;
+}
+
+/* .ticket-container {
+  display: flex;
+  padding: 25px 25px;
+  background-color: var(--backgcolour);
+  border: 2px solid var(--skyblue);
+  font-size: 20px;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-flow: row wrap;
+} */
 
 #form {
   padding-left: 2vh;
@@ -622,7 +637,7 @@ select {
     padding: none;
   }
 
-  main > section {
+  /* main > section {
     margin: 0px;
     border: solid 2px #ccc;
     background-color: #fff;
@@ -635,37 +650,46 @@ select {
   }
   main > article > section header {
     background-color: #ccc;
-  }
+  } */
 
   .grid-container-2-column > div {
-    /* background-color: rgba(255, 255, 255, 0.8); */
-    /* text-align: left; */
     padding: 0px 0;
     /* font-size: 20px; */
     box-sizing: border-box;
     /* border: 2px solid var(--skyblue); */
     page-break-inside: avoid;
   }
+
   .grid-container-3-column > div {
-    /* background-color: rgba(255, 255, 255, 0.8); */
-    /* text-align: left; */
     padding: 0px 0;
     /* font-size: 80px; */
     box-sizing: border-box;
     /* border: 2px solid var(--skyblue); */
     page-break-inside: avoid;
+    page-break-after: always;
   }
 
   .grid-container-3-column {
     page-break-inside: avoid;
+    page-break-after: always;
   }
 
   .grid-container-2-column {
     page-break-inside: avoid;
   }
 
-  .ticketDiv {
+  .tickets-page {
+    display: block;
+  }
+
+  .ticket-container {
+    /* page-break-after: always; */
     page-break-inside: avoid;
+    box-sizing: border-box;
+    border: 2px solid var(--skyblue);
+  }
+
+  .ticketDiv {
     font-size: 75%;
   }
 
@@ -695,11 +719,3 @@ select {
     min-height: 267mm;
   }
 }
-
-/* Knockout styles for non-print media */
-/* @media not print {
-  figure {
-    max-width:80%;
-  }
-
-} */

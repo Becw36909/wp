@@ -21,8 +21,10 @@ function validateBooking()
     } else {
       $_SESSION = $_POST;
       // echo "you are free to go \n";
+      // THE FOLLOWING REDIRECT IS TURNED OFF AS IT WAS NOT WORKING/GETTING STUCK
       // header("Location: https://titan.csit.rmit.edu.au/~s3903758/wp/a3/receipt.php");
       // exit();
+      header("Location: receipt.php");
     }
   } else {
     // echo "no STUFFs FOUNDs IN the POST \n";
@@ -83,16 +85,18 @@ function findPostErrors()
   // echo "<br>";
   if (!array_key_exists($_POST['movie'], $movies)) {
     // echo "MOVIE NOT FOUND";
-    header("Location: https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php");
-    exit();
+    // header("Location: https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php");
+    // exit();
+    header("Location: index.php");
   }
 
   //Check day exists 
   if (!empty($_POST['day']) && !array_key_exists($_POST['day'], $movies[$movie]['movie-times'])) {
   // if (($_POST['day'] != $movies[$movie]['movie-times'])) {
     // echo "DAY NOT FOUND";
-    header('Location: https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php');
-    exit();
+    // header('Location: https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php');
+    // exit();
+    header("Location: index.php");
   } elseif (empty($_POST['day'])) {
     $errors['day'] = "You must choose a day to book";
     // echo $errors['day'];
@@ -127,12 +131,14 @@ function findPostErrors()
   foreach ($_POST['seats'] as $class => $amount) {
     if (!filter_var($amount, FILTER_VALIDATE_INT) && !$amount == $uncheckedSeat) {
       // echo "THIS IS NOT A VALID NUMBER";
-      header("Location: https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php");
-      exit();
+      // header("Location: https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php");
+      // exit();
+      header("Location: index.php");
     } elseif ($amount > $maxSeats) {
       // echo "NO NO NO TOO MANY SEATS ";
-      header("Location: https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php");
-      exit();
+      // header("Location: https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php");
+      // exit();
+      header("Location: index.php");
     } else {
       // echo "valid number";
     }

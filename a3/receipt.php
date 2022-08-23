@@ -1,5 +1,5 @@
 <?php require_once('tools.php');
-validateSessionData();?>
+validateSessionData(); ?>
 <!-- // echo "SESSION ARRAY BELOW";
 // echo "<br>";
 // print_r($_SESSION);
@@ -63,6 +63,7 @@ validateSessionData();?>
         <div class="leftItem"><?php getCustomerDetails(); ?></div>
       </div>
 
+
       <div class="grid-container-3-column">
         <div class="leftItem">Seat Type</div>
         <div class="centerItem">Quantity</div>
@@ -70,25 +71,53 @@ validateSessionData();?>
         <?php calculateSeatTotals(); ?>
       </div>
 
-      <div class="heading2">
-        <h2>Tickets</h2>
-      </div>
-
-      <!-- <div class="grid-container-2-column"> -->
-        <?php printTickets(); ?>
-      <!-- </div> -->
-      <div class="flex-container">
-        <!-- stuff here -->
-      </div>
-
     </section>
+    <section id="tickets">
+      <div class="tickets-page">
+        <div class="heading2">
+          <h2>Tickets</h2>
+        </div>
 
+
+
+        <!-- <div class="tickets-container"> -->
+        <?php printTickets(); ?>
+        <?php writeBookingToArray(); ?>
+        <?php writeBookingToFile(); ?>
+        <!-- </div> -->
+        <!-- <div class="ticket-container">
+        <div class="grid-container-2-column">
+        <div class="leftItem ticketDiv">
+        <h3>{$movies[$movieID]['title']} - $movieDay, $movieTime </h3>
+        <ul> 
+        <li>LUNARDO CINEMA</li>
+        <li>{$pricingArr[$seatType]['name']}</li>
+        </ul>
+        </div>
+        <div class="rightItem">
+        <p>Admit</p> 
+        <p>x1</p>
+        <p>{$pricingArr[$seatType]['name']}</p>
+        </div>
+        </div>
+        </div>
+        <div>
+        </div> -->
+
+
+
+
+
+      </div>
+    </section>
+    <div class="flex-container">
+      <!-- stuff here -->
+    </div>
   </main>
 
   <?php lunardoFooter(); ?>
-  <?php writeBookingToArray(); ?>
-  <?php writeBookingToFile(); ?>
-  
+
+
   <div><?php debugModule(); ?></div>
 
 </body>
