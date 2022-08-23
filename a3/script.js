@@ -1,4 +1,4 @@
-var formTotal;
+var userTotal = 0;
 var nameCountErrors = 0;
 var phoneCountErrors = 0;
 
@@ -22,13 +22,17 @@ function nameCheck() {
     nameCountErrors = 0;
     console.log("name checked ok");
     console.log("nameCountErrors= " + nameCountErrors);
-    return true;
+    console.log("userTotal= " + userTotal);
+    return nameCountErrors;
+    // return true;
   } else {
     alert("You have entered an invalid name!");
     console.log("name checked WRONG");
     nameCountErrors++;
     console.log("nameCountErrors= " + nameCountErrors);
-    return false;
+    console.log("userTotal= " + userTotal);
+    return nameCountErrors;
+    // return false;
   }
 }
 
@@ -41,13 +45,17 @@ function phoneNumberCheck() {
     phoneCountErrors = 0;
     console.log("number checked ok");
     console.log("phoneCountErrors= " + phoneCountErrors);
-    return true;
+    console.log("userTotal= " + userTotal);
+    return phoneCountErrors;
+    // return true;
   } else {
     alert("You have entered an invalid phone number!");
     console.log("number checked WRONG");
     phoneCountErrors++;
     console.log("phoneCountErrors= " + phoneCountErrors);
-    return false;
+    console.log("userTotal= " + userTotal);
+    return phoneCountErrors;
+    // return false;
   }
 }
 
@@ -57,10 +65,7 @@ function getid(sP) {
 
 // function clearErrors() {
 //   alert("about to clear errors")
-
 // }
-
-
 
 // This is where it all happens!
 function formValidate() {
@@ -74,7 +79,9 @@ function formValidate() {
   //   alert("You need to choose seat/s");
   //   console.log("no seats checked");
   //   return false;
-  if (formTotal > 0 && (nameCountErrors = 0) && (phoneCountErrors = 0)) {
+  if (userTotal > 0 && nameCountErrors == 0 && phoneCountErrors == 0) {
+    // if (userTotal > 0 ) {
+
     return true;
   } else {
     alert(
@@ -126,10 +133,11 @@ function logDetails() {
     total += subtotal;
     var totalformatted = total.toFixed(2);
   }
-  formTotal = total;
+  userTotal = total;
   total > 0
     ? (document.getElementById("price").innerHTML = "$ " + totalformatted)
     : (document.getElementById("price").innerHTML = " ");
-  console.log(total);
-  return total > 0;
+  console.log("current total is " + total);
+  console.log("current userTotal is " + userTotal);
+  return userTotal;
 }
