@@ -1,0 +1,4 @@
+Order Date, Name, Email, Mobile, Movie Code, Day of Movie, Time of Movie, # STA, $ STA, # STP, $ STP, # STC, $ STC, # FCA, $ FCA, # FCP, $ FCP, # FCC, $ FCC, Total, GST,
+
+"01/09 02:53",bec,becw36909@gmail.com,0422574434,RMC,Friday,12pm,1,$15.00,1,$13.50,2,$24.00,,,,,,,$52.50,$4.77
+"01/09 03:16",mel,test@test.com,0422574434,AHF,Tuesday,6pm,1,$20.50,,,,,,,,,,,$20.50,$1.86
