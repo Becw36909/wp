@@ -5,3 +5,7 @@ Order Date, Name, Email, Mobile, Movie Code, Day of Movie, Time of Movie, # STA,
 "02/09 04:14",bec,becw36909@gmail.com,0422574434,FAM,Tuesday,12pm,,,,,,,1,$24.00,,,4,$84.00,$108.00,$9.82
 "2022 September 01  15:55",allan,allan@allan.com,0422574434,AHF,Sunday,9pm,,,,,,,,,2,$54.00,,,$54.00,$4.91
 "2022 September 01  15:55",allan,allan@allan.com,0422574434,RMC,Wednesday,12pm,1,$15.00,,,,,,,,,,,$15.00,$1.36
+"2022 September 01  15:55",alice,alice@test.com,0422574434,RMC,Sunday,3pm,,,3,$54.00,,,,,,,,,$54.00,$4.91
+"2022 September 02  23:50",Henry,henry@superman.com,0422574434,ACT,Tuesday,9pm,,,,,,,3,$90.00,3,$81.00,3,$72.00,$243.00,$22.09
+"2022 September 03  01:20",Henry,henry@superman.com,0422574434,ACT,Thursday,9pm,1,$20.50,,,,,,,,,,,$20.50,$1.86
+"2022 September 03  01:20",emma,emma@test.com,0422574434,ACT,Wednesday,9pm,2,$41.00,,,,,2,$60.00,,,,,$101.00,$9.18

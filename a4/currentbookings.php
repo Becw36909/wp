@@ -1,7 +1,7 @@
 <?php require_once('tools.php');
-   readFromBookingsFile(); 
-   printCurrentBookings(); 
-   retrieveRequestedBooking(); 
+readFromBookingsFile();
+//    printCurrentBookings(); 
+retrieveRequestedBooking();
 
 ?>
 
@@ -32,16 +32,12 @@
     <main>
         <section id="bookingDetails">
 
-            <div class="heading2">
-                <h2>WELCOME BACK!</h2>
-            </div>
-
-                <div class="leftItem"><?php printAllCurrentBookings(); ?></div>
+            <div class="leftItem"><?php printAllCurrentBookings(); ?></div>
             </div>
 
 
         </section>
-       
+
         </section>
         <div class="flex-container">
             <!-- stuff here -->

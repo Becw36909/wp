@@ -1,5 +1,7 @@
 <?php require_once('tools.php');
-validateSessionData(); ?>
+// putRequestedBookingArrayInSession();
+validateSessionData(); 
+?>
 
 
 
@@ -72,7 +74,9 @@ validateSessionData(); ?>
       <!-- <div class="tickets-container"> -->
       <?php printTickets(); ?>
       <?php writeBookingToArray(); ?>
-      <?php writeBookingToFile(); ?>
+      <!-- <?php writeBookingToFile(); ?> -->
+
+
       <!-- </div> -->
       <!-- <div class="ticket-container">
         <div class="grid-container-2-column">

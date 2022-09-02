@@ -556,7 +556,6 @@ function formData($errors)
   </form>
   </div>
 CDATA;
-  
 }
 
 // form for user to request booking with their name and email
@@ -590,8 +589,8 @@ $requestedBookingArr = [];
 function readFromBookingsFile()
 {
   global $currentBookings;
-  echo "bookings ahead being read out";
-  echo "<br>";
+  // echo "bookings ahead being read out";
+  // echo "<br>";
 
   // if (($fp = fopen('bookings.txt', 'r')) && flock($fp, LOCK_SH)) {
   //   if (($headings = fgetcsv($fp, 0, ",")) !== false) {
@@ -609,12 +608,12 @@ function readFromBookingsFile()
     fclose($fp);
   }
 
-  echo "bookings below";
-  echo "<br>";
+  // echo "bookings below";
+  // echo "<br>";
   return $currentBookings;
 }
 
-// checking the currentBookings array has been populated and returned as desired
+// checking the complete currentBookings array has been populated and returned as desired
 function printCurrentBookings()
 {
   global $currentBookings;
@@ -622,68 +621,45 @@ function printCurrentBookings()
   echo "<br>";
 }
 
-// function getBookedSeats(){
-//   global $requestedBookingArr;
-//   global $requestedBookedSeats;
-//      // create the string of selected seats
-//      $bookedSeats = "";
-//      if ($requestedBookingArr[7] > 0) {
-//       $standardAdult = $requestedBookingArr[7] . " x Standard Adult. ";
-//       array_push($requestedBookedSeats, $standardAdult);
-//      }
-//      if ($requestedBookingArr[9] > 0) {
-//       $standardConcession = $requestedBookingArr[9] . " x Standard Concession ";
-//       array_push($requestedBookedSeats, $standardConcession);
-//      }
-//      if ($requestedBookingArr[11] > 0) {
-//       $standardChild = $requestedBookingArr[11] . " x Standard Child. ";
-//       array_push($requestedBookedSeats, $standardChild);
-//      }
-//      if ($requestedBookingArr[13] > 0) {
-//       $firstClassAdult = $requestedBookingArr[13] . " x First Class Adult. ";
-//       array_push($requestedBookedSeats, $firstClassAdult);
-//      }
-//      if ($requestedBookingArr[15] > 0) {
-//       $firstClassConcession = $requestedBookingArr[15] . " x First Class Concession. ";
-//       array_push($requestedBookedSeats, $firstClassConcession);
-//      }
-//      if ($requestedBookingArr[17] > 0) {
-//       $firstClassChild = $requestedBookingArr[17] . " x First Class Child. ";
-//       array_push($requestedBookedSeats, $firstClassChild);
-//      }
-//      return $requestedBookedSeats;
-// }
 
 // match the user with current bookings from post data if there are any
 function retrieveRequestedBooking()
 {
   global $currentBookings;
   global $requestedBookingArr;
-  $postName = $_POST['user']['name'];
-  $postEmail = $_POST['user']['email'];
+  $sessionName = $_SESSION['user']['name'];
+  $sessionEmail = $_SESSION['user']['email'];
 
   // print_r($requestedBookingArr);
   foreach ($currentBookings as $booking) {
     // if (($booking[1] == $_POST['name']) && ($booking[2] == $_POST['email'])) {
-    if (($booking[1] == $postName) && ($booking[2] == $postEmail)) {
+    if (($booking[1] == $sessionName) && ($booking[2] == $sessionEmail)) {
 
       // push valid bookings into array
       array_push($requestedBookingArr, $booking);
     }
   }
-  echo "<br>";
-  echo "requested booking array below";
-  echo "<br>";
-  print_r($requestedBookingArr);
+  // echo "<br>";
+  // echo "requested booking array below";
+  // echo "<br>";
+  // print_r($requestedBookingArr);
   return $requestedBookingArr;
 }
 
-// prints out all current bookings according to retrieved/matched booking file info
+// prints out all current bookings according to retrieved/matched booking file info given by the user
 function printAllCurrentBookings()
 {
   global $requestedBookingArr;
   global $movies;
+  $indexCounter = 0;
+  $customerName = $_SESSION['user']['name'];
+  echo <<< CDATA
+    <div class="heading2">
+        <h2>WELCOME BACK, {$customerName}!</h2>
+    </div>
+    CDATA;
   foreach ($requestedBookingArr as $booking) {
+
     $movieID = $booking[4];
     $requestedBookedSeats = [];
     if ($booking[7] > 0) {
@@ -717,6 +693,7 @@ function printAllCurrentBookings()
         <h3>{$movies[$movieID]['title']} - $booking[5], $booking[6] </h3>
         <ul> 
         <li>LUNARDO CINEMA</li>
+        <li>Customer Name: $booking[1]</li>
         <li>Booking Made: $booking[0] </li>
       CDATA;
     foreach ($requestedBookedSeats as $seats) {
@@ -726,6 +703,11 @@ function printAllCurrentBookings()
     }
     echo <<< CDATA
         </ul>
+        <p><form name="requestBookingForm" action="receipt.php" method="get">
+        <input type="hidden" name="bookingRequest" value={$indexCounter}>
+        <input type="submit" value="Submit Booking Request"></p>
+            </form>
+         </p>
         </div>
         <div class="rightItem">
         <p>Booking</p> 
@@ -737,9 +719,11 @@ function printAllCurrentBookings()
         <div>
         </div>
     CDATA;
+    $indexCounter++;
   }
+  // $_SESSION = $requestedBookingArr;
+  // return $requestedBookingArr;
 }
-
 
 // gets customer details from SESSION and prints them out for receipt
 function getCustomerDetails()
@@ -754,6 +738,13 @@ function getCustomerDetails()
   }
 }
 
+function putRequestedBookingArrayInSession()
+{
+  global $requestedBookingArr;
+  print_r($requestedBookingArr);
+  // $_SESSION = $requestedBookingArr;
+}
+
 // gets movie details according to movieID and prints out
 function movieReceiptDetails()
 {
@@ -764,6 +755,26 @@ function movieReceiptDetails()
     $movieTime = $movies[$movieID]['movie-times'][$movieDay];
     echo "<h3>{$movies[$movieID]['title']} - $movieDay, $movieTime </h3>";
   }
+  // global $movies;
+  // global $requestedBookingArr;
+  // $bookingIndex = $_GET['bookingRequest'];
+  // if (!isset($_GET['bookingRequest'])) {
+  //   $movieDay = $_SESSION['day'];
+  //   $movieID = $_SESSION['movie'];
+  //   if (!empty($_SESSION)) {
+  //     $movieTime = $movies[$movieID]['movie-times'][$movieDay];
+  //     echo "<h3>{$movies[$movieID]['title']} - $movieDay, $movieTime </h3>";
+  //   }
+  // } else {
+  //   echo "<h3>hello </h3>";
+  //   print_r($_SESSION['user']['name']);
+  //   echo "<h3>hello </h3>";
+
+  //   $movieID = $requestedBookingArr[$bookingIndex][4];
+  //   $movieDay = $requestedBookingArr[$bookingIndex][5];
+  //   $movieTime = $requestedBookingArr[$bookingIndex][6];
+  //   echo "<h3>{$movies[$movieID]['title']} - $movieDay, $movieTime </h3>";
+  // }
 }
 
 // setting up some arrays to use for booking details and seat prices/quantities
@@ -927,70 +938,20 @@ function writeBookingToArray()
   return $bookingDetails;
 }
 
-// writes all booking details to a string ready to write to a file
-// function writeBookingToString()
-// {
-//   global $bookingDetails;
-//   global $totalBookingPrices;
-//   global $bookedSeats;
-//   global $bookedSeatPrices;
-//   global $movies;
-//   $movieID = $_SESSION['movie'];
-//   $movieDay = $_SESSION['day'];
-//   $movieTime = $movies[$movieID]['movie-times'][$movieDay];
-//   $bookingString = "$bookingDetails[0], 
-//   {$_SESSION['user']['name']},
-//   {$_SESSION['user']['email']},
-//   {$_SESSION['user']['mobile']},
-//   {$_SESSION['movie']},
-//   {$_SESSION['day']},
-//   $movieTime,
-//   {$bookedSeats['STA']},
-//   {$bookedSeatPrices['STA']},
-//   {$bookedSeats['STP']},
-//   {$bookedSeatPrices['STP']},
-//   {$bookedSeats['STC']},
-//   {$bookedSeatPrices['STC']},
-//   {$bookedSeats['FCA']},
-//   {$bookedSeatPrices['FCA']},
-//   {$bookedSeats['FCP']},
-//   {$bookedSeatPrices['FCP']},
-//   {$bookedSeats['FCC']},
-//   {$bookedSeatPrices['FCC']},
-//   {$totalBookingPrices[0]},
-//   {$totalBookingPrices[1]} ";
-//   return $bookingString;
-//   // echo $bookingString;
-// }
-
 // writes booking details array to a file
 function writeBookingToFile()
 {
-  global $bookingDetails;
-  // $bookingString = writeBookingToString();
-  // print_r (explode(",",$bookingString ));
-  // $bookingStringArr = (explode(",", $bookingString));
-  // echo $bookingString;
-  // $filename = 'bookings.txt';
-  // if (($fp = fopen($filename, "a")) && flock($fp, LOCK_EX) !== false) {
-  //   // Note: Appending assumes headings are already present!
-  //   foreach ($bookingDetails as $record => $details) {
-  //     fputcsv($fp, $details);
-  //   }
-  //   // file_put_contents($filename, $bookingString, LOCK_EX | FILE_APPEND);
-
-  //   flock($fp, LOCK_UN);
-  //   fclose($fp);
-  // };
-
-  // make array of just the values from booking details to send to text file
-  $detailsForCSV = array_values($bookingDetails);
-  // Open the file for appending
-  $bookingsFile = fopen('bookings.txt', 'a');
-  //  Add the Array to the file using fputcsv()
-  fputcsv($bookingsFile, $detailsForCSV);
-  // Close the file
-  fclose($bookingsFile);
+  if (!isset($_GET['bookingRequest'])) {
+    global $bookingDetails;
+    // make array of just the values from booking details to send to text file
+    $detailsForCSV = array_values($bookingDetails);
+    // Open the file for appending
+    $bookingsFile = fopen('bookings.txt', 'a');
+    //  Add the Array to the file using fputcsv()
+    fputcsv($bookingsFile, $detailsForCSV);
+    // Close the file
+    fclose($bookingsFile);
+  }
 }
 
 // bookings.txt headings for reference:

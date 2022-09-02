@@ -1,7 +1,7 @@
-<?php 
+<?php
 require_once('tools.php');
 require_once('post-validation.php');
-// $requestErrors = validateBookingRequest();
+$requestErrors = validateBookingRequest();
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +26,7 @@ require_once('post-validation.php');
   <script src='../wireframe.js'></script>
 </head>
 
-<body onscroll="currentLinks()" >
+<body onscroll="currentLinks()">
   <!-- 
   <header>
     <div>
@@ -139,7 +139,7 @@ require_once('post-validation.php');
 
 
       <div id="movie-card-container">
-      <?php printMoviePanels(); ?>
+        <?php printMoviePanels(); ?>
 
       </div>
 
@@ -156,7 +156,7 @@ require_once('post-validation.php');
       <div><button id='toggleWireframeCSS' onclick='toggleWireframe()'>Toggle Wireframe CSS</button></div>
   </footer> -->
   <?php lunardoFooterWithBookingRequest($requestErrors); ?>
-  
+
   <div><?php debugModule(); ?></div>
 
 </body>

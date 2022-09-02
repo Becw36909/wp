@@ -11,6 +11,7 @@ $uncheckedSeat = '';
 function validateBooking()
 {
   if (!empty($_POST)) {
+
     // echo "STUFF FOUND IN POST \n";
     // echo "<br>";
     $errors = findPostErrors();
@@ -123,47 +124,47 @@ function findPostErrors()
   return $errors;
 }
 
-// function validateBookingRequest()
-// {
-//   if (!empty($_POST)) {
-//     // echo "STUFF FOUND IN POST \n";
-//     // echo "<br>";
-//     $requestErrors = findRequestErrors();
-//      echo "printing request errrors below:\n";
-//     echo "<br>";
-//     print_r ($requestErrors);
-//     if (count($requestErrors) > 0) {
-//       echo "you have errors \n";
-//       echo $requestErrors['error'] . " \n";
-//       return $requestErrors;
-//     } else {
-//       // $_SESSION = $_POST;
-//       echo "you are free to go \n";
-//       // header("Location: currentbookings.php");
-//     }
-//   } else {
-//     echo "nothing zilch nada \n";
-//   }
-// }
+function validateBookingRequest()
+{
+  if (!empty($_POST)) {
+    // echo "STUFF FOUND IN POST \n";
+    // echo "<br>";
+    $requestErrors = findRequestErrors();
+    echo "printing request errrors below:\n";
+    echo "<br>";
+    print_r($requestErrors);
+    if (count($requestErrors) > 0) {
+      echo "you have errors \n";
+      echo $requestErrors['error'] . " \n";
+      return $requestErrors;
+    } else {
+      // $_SESSION = $_POST;
+      echo "you are free to go \n";
+      // header("Location: currentbookings.php");
+    }
+  } else {
+    // echo "nothing zilch nada \n";
+  }
+}
 
-// function findRequestErrors()
-// {
-//   global $currentBookings;
-//   $requestErrors = [];
-//   $postName = $_POST['user']['name'];
-//   $postEmail = $_POST['user']['email'];
-//   $currentBookings = readFromBookingsFile();
-//   foreach ($currentBookings as $booking) {
-    
-//     // if (($booking[1] == $_POST['name']) && ($booking[2] == $_POST['email'])) {
-//     if (($booking[1] == $postName) && ($booking[2] == $postEmail)) {
-//       // $requestErrors['error'] = "Sorry, we found no current bookings matching that name and email address";
-//       echo "WE FOUND YOU\n";
-//       header("Location: currentbookings.php");
-//     }
-//     else {
-//       $requestErrors['error'] = "Sorry, we found no current bookings matching that name and email address";
-//     }
-//   }
-//   return $requestErrors;
-// }
+function findRequestErrors()
+{
+  global $currentBookings;
+  $requestErrors = [];
+  $postName = $_POST['user']['name'];
+  $postEmail = $_POST['user']['email'];
+  $currentBookings = readFromBookingsFile();
+  foreach ($currentBookings as $booking) {
+
+    // if (($booking[1] == $_POST['name']) && ($booking[2] == $_POST['email'])) {
+    if (($booking[1] == $postName) && ($booking[2] == $postEmail)) {
+      // $requestErrors['error'] = "Sorry, we found no current bookings matching that name and email address";
+      // echo "WE FOUND YOU\n";
+      $_SESSION = $_POST;
+      header("Location: currentbookings.php");
+    } else {
+      $requestErrors['error'] = "Sorry, we found no current bookings matching that name and email address";
+    }
+  }
+  return $requestErrors;
+}
