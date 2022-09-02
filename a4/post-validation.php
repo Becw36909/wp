@@ -149,3 +149,37 @@ function findPostErrors()
   return $errors;
 }
 
+function validateBookingRequest()
+{
+  if (!empty($_POST)) {
+    // echo "STUFF FOUND IN POST \n";
+    // echo "<br>";
+    $requestErrors = findRequestErrors();
+    if (count($requestErrors) > 0) {
+      // echo "you have errors \n";
+
+      return $requestErrors;
+    } else {
+      // $_SESSION = $_POST;
+      // echo "you are free to go \n";
+      header("Location: currentbookings.php");
+    }
+  } else {
+    // echo "no STUFFs FOUNDs IN the POST \n";
+  }
+}
+
+function findRequestErrors(){
+  global $currentBookings;
+  $requestErrors = [];
+  $postName = $_POST['user']['name'];
+  $postEmail = $_POST['user']['email'];
+    readFromBookingsFile();
+    foreach ($currentBookings as $booking) {
+      // if (($booking[1] == $_POST['name']) && ($booking[2] == $_POST['email'])) {
+      if ((!$booking[1] == $postName) && (!$booking[2] == $postEmail)) {
+        $requestErrors['error'] = "Sorry, we found no current bookings matching that name and email address";
+      }
+    }
+    return $requestErrors;
+}

@@ -1,4 +1,6 @@
 <?php require_once('tools.php');
+
+
 ?>
 
 <!DOCTYPE html>
@@ -22,53 +24,24 @@
 </head>
 
 <body>
-    <?php readFromBookingsFile(); ?>
+    <!-- <?php readFromBookingsFile(); ?>
+    <?php printCurrentBookings(); ?>
+    <?php retrieveRequestedBooking(); ?> -->
+
     <?php lunardoHeader(); ?>
     <main>
-        <section id="receiptDetails">
+        <section id="bookingDetails">
 
             <div class="heading2">
-                <h2>WELCOME RETURNING CUSTOMER</h2>
+                <h2>WELCOME, <?php $_POST['user']['name']; ?></h2>
             </div>
 
-            <div class="grid-container-2-column">
-                <div class="leftItem">
-                    <!-- <h3><?php movieReceiptDetails(); ?></h3> -->
-                </div>
-                <div class="rightItem"></div>
+                <div class="leftItem"><?php printAllCurrentBookings(); ?></div>
             </div>
 
-            <div class="grid-container-2-column">
-                <div class="leftItem"><?php companyDetails(); ?></div>
-                <div class="rightItem">
-                    <p>Booking Made:</p>
-                    <p><?= date("Y-m-d"); ?></p>
-                </div>
-            </div>
-
-            <div class="grid-container-2-column">
-                <!-- <div class="leftItem"><?php getCustomerDetails(); ?></div> -->
-            </div>
-
-
-            <div class="grid-container-3-column">
-                <div class="leftItem">Seat Type</div>
-                <div class="centerItem">Quantity</div>
-                <div class="rightItem">Subtotal</div>
-                <!-- <?php calculateSeatTotals(); ?> -->
-            </div>
 
         </section>
-        <section id="tickets">
-            <!-- <div class="tickets-page"> -->
-            <div class="heading2">
-                <h2>Tickets</h2>
-            </div>
-
-
-
-            <!-- <?php printTickets(); ?> -->
-
+       
         </section>
         <div class="flex-container">
             <!-- stuff here -->

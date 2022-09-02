@@ -1,5 +1,7 @@
 <?php 
 require_once('tools.php');
+require_once('post-validation.php');
+$requestErrors = validateBookingRequest();
 ?>
 
 <!DOCTYPE html>
@@ -153,7 +155,7 @@ require_once('tools.php');
       <div>Disclaimer: This website is not a real website and is being developed as part of a School of Science Web Programming course at RMIT University in Melbourne, Australia.</div>
       <div><button id='toggleWireframeCSS' onclick='toggleWireframe()'>Toggle Wireframe CSS</button></div>
   </footer> -->
-  <?php lunardoFooter(); ?>
+  <?php lunardoFooterWithBookingRequest($requestErrors); ?>
   
   <div><?php debugModule(); ?></div>
 

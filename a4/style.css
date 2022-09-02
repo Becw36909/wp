@@ -300,6 +300,7 @@ fieldset input[type="radio"] + label:hover {
   background-color: var(--skyblue);
 }
 
+.checkbox:checked,
 fieldset input[type="radio"]:checked + label {
   background-color: var(--skyblue);
   color: var(--white);
