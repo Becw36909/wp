@@ -60,6 +60,12 @@ header {
   font-size: 115%;
 }
 
+.span3 {
+  color: var(--white);
+  background-color: var(--maroon);
+  font-size: 115%;
+}
+
 footer {
   background-color: var(--skyblue);
   color: black;
@@ -154,16 +160,6 @@ footer {
   flex-grow: 7;
 }
 
-/* .ticket-container {
-  display: flex;
-  padding: 25px 25px;
-  background-color: var(--backgcolour);
-  border: 2px solid var(--skyblue);
-  font-size: 20px;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-flow: row wrap;
-} */
 
 #form {
   padding-left: 2vh;
@@ -279,7 +275,28 @@ fieldset input[type="radio"] {
   display: none;
 }
 
+input[type="checkbox"] {
+  display: none;
+}
+
 fieldset input[type="radio"] + label {
+  display: inline-block;
+  width: 140px;
+  padding: 15px 25px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: var(--maroon);
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  transition-duration: 0.4s;
+}
+
+input[type="checkbox"] + label {
   display: inline-block;
   width: 140px;
   padding: 15px 25px;
@@ -300,8 +317,19 @@ fieldset input[type="radio"] + label:hover {
   background-color: var(--skyblue);
 }
 
-.checkbox:checked,
+input[type="checkbox"] + label:hover {
+  background-color: var(--skyblue);
+}
+
+
 fieldset input[type="radio"]:checked + label {
+  background-color: var(--skyblue);
+  color: var(--white);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+input[type="checkbox"]:checked + label {
   background-color: var(--skyblue);
   color: var(--white);
   box-shadow: 0 5px #666;

@@ -3,7 +3,7 @@ require_once('tools.php');
 require_once('post-validation.php');
 validateMovieCode();
 $errors = validateBooking();
-$requestErrors = validateBookingRequest();
+// $requestErrors = validateBookingRequest();
 // print_r($errors);
 // checkingMovieDays();
 ?>
@@ -20,7 +20,7 @@ $requestErrors = validateBookingRequest();
   <meta name="description" content="Lunardo Cinema Booking Page">
   <!-- <link rel="stylesheet" href="style.css" type="text/css"> -->
   <link rel="icon" href='../../media/lunastar.png' type="image/x-icon">
-  <script src="script.js"></script>
+  
 
 
   <title>Lunardo Booking Page</title>
@@ -31,7 +31,7 @@ $requestErrors = validateBookingRequest();
   <script src='../wireframe.js'></script>
 </head>
 
-<body>
+<body onload="isRememberMeOn()">
 
   <?php lunardoHeader(); ?>
 
@@ -49,6 +49,8 @@ $requestErrors = validateBookingRequest();
 
       <?php formData($errors); ?>
 
+      <?php rememberClientDetails(); ?>
+
     </section>
 
   </main>
@@ -57,6 +59,7 @@ $requestErrors = validateBookingRequest();
   <?php debugModule(); ?>
   </pre>
   </aside>
+  <script src="script.js"></script>
 </body>
 
 </html>

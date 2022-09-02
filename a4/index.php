@@ -1,7 +1,7 @@
 <?php 
 require_once('tools.php');
 require_once('post-validation.php');
-$requestErrors = validateBookingRequest();
+// $requestErrors = validateBookingRequest();
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +26,7 @@ $requestErrors = validateBookingRequest();
   <script src='../wireframe.js'></script>
 </head>
 
-<body onscroll="currentLinks()">
+<body onscroll="currentLinks()" >
   <!-- 
   <header>
     <div>

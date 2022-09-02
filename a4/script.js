@@ -141,3 +141,41 @@ function logDetails() {
   console.log("current userTotal is " + userTotal);
   return userTotal;
 }
+
+function changeRememberMeButtonText() {
+  var labeltext = document.getElementById("remember-me-label");
+  console.log("remember me is clicked on ");
+  var name = getid("name").value;
+  var mobile = getid("mobile").value;
+  var email = getid("email").value;
+  if (labeltext.innerHTML === "Remember Me") {
+    localStorage.setItem("name", name);
+    localStorage.setItem("mobile", mobile);
+    localStorage.setItem("email", email);
+    localStorage.setItem("rememberMe", "true");
+    labeltext.innerHTML = "Forget Me";
+  } else {
+    labeltext.innerHTML = "Remember Me";
+    localStorage.clear();
+  }
+}
+
+function isRememberMeOn() {
+  var name = document.querySelector("#name");
+  var email = document.querySelector("#email");
+  var mobile = document.querySelector("#mobile");
+  var rememberMeLabel = document.querySelector("#remember-me-label");
+  var rememberMe = document.querySelector("#remember-me");
+  if (localStorage.rememberMe == "true") {
+    // keep the checkbox checked if localStorage.rememberMe is true
+    rememberMe.checked = true;
+    rememberMeLabel.innerText = "Forget Me";
+    // prefill the name, email and mobile number fields from the data in localStorage
+    name.value = localStorage.getItem("name");
+    email.value = localStorage.getItem("email");
+    mobile.value = localStorage.getItem("mobile");
+  } else {
+    rememberMeLabel.checked = false;
+    rememberMeLabel.innerText = "Remember Me";
+  }
+}

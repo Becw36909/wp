@@ -368,10 +368,11 @@ function createRadioButtons()
 function rememberClientDetails()
 {
   echo <<<"CDATA"
-  <div>
-  <input type="checkbox" id="remember-me" name="remember-me" value='' >
-  <label for="remember-me">Remember Me</label>
+  <div class="flex-container">
+  <input type="checkbox" id="remember-me" name="remember-me" onclick="changeRememberMeButtonText()" >
+  <label id="remember-me-label" for="remember-me">Remember Me</label>
   </div>
+
   CDATA;
 }
 
@@ -555,13 +556,13 @@ function formData($errors)
   </form>
   </div>
 CDATA;
-  rememberClientDetails();
+  
 }
 
 // form for user to request booking with their name and email
 function retrieveBookingForm($requestErrors)
 {
-  $bookingRequestError = ' <span class="span2" >' . unsetFB($requestErrors['error']) . '<span >';
+  $bookingRequestError = ' <span class="span3" >' . unsetFB($requestErrors['error']) . '<span >';
   //<form name="retrieveBookingForm" action="currentbookings.php" method="post">
   echo <<< CDATA
   <div id="form">
@@ -661,7 +662,7 @@ function retrieveRequestedBooking()
   $postName = $_POST['user']['name'];
   $postEmail = $_POST['user']['email'];
 
-  print_r($requestedBookingArr);
+  // print_r($requestedBookingArr);
   foreach ($currentBookings as $booking) {
     // if (($booking[1] == $_POST['name']) && ($booking[2] == $_POST['email'])) {
     if (($booking[1] == $postName) && ($booking[2] == $postEmail)) {

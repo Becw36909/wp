@@ -1,5 +1,7 @@
 <?php require_once('tools.php');
-
+   readFromBookingsFile(); 
+   printCurrentBookings(); 
+   retrieveRequestedBooking(); 
 
 ?>
 
@@ -24,16 +26,14 @@
 </head>
 
 <body>
-    <!-- <?php readFromBookingsFile(); ?>
-    <?php printCurrentBookings(); ?>
-    <?php retrieveRequestedBooking(); ?> -->
+
 
     <?php lunardoHeader(); ?>
     <main>
         <section id="bookingDetails">
 
             <div class="heading2">
-                <h2>WELCOME, <?php $_POST['user']['name']; ?></h2>
+                <h2>WELCOME BACK!</h2>
             </div>
 
                 <div class="leftItem"><?php printAllCurrentBookings(); ?></div>

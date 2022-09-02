@@ -31,13 +31,6 @@ function validateBooking()
   }
 }
 
-// function setChecked (&$str, $val) {
-//   return ( isset($str) && $str == $val ? 'checked' : '' ); 
-// }
-
-// function setSelected (&$str, $val) {
-//   return ( isset($str) && $str == $val ? 'selected' : '' ); 
-// }
 
 function findPostErrors()
 {
@@ -92,7 +85,7 @@ function findPostErrors()
 
   //Check day exists 
   if (!empty($_POST['day']) && !array_key_exists($_POST['day'], $movies[$movie]['movie-times'])) {
-  // if (($_POST['day'] != $movies[$movie]['movie-times'])) {
+    // if (($_POST['day'] != $movies[$movie]['movie-times'])) {
     // echo "DAY NOT FOUND";
     // header('Location: https://titan.csit.rmit.edu.au/~s3903758/wp/a3/index.php');
     // exit();
@@ -101,25 +94,6 @@ function findPostErrors()
     $errors['day'] = "You must choose a day to book";
     // echo $errors['day'];
   }
-
-
-  // echo "<br>";
-  // print_r($_POST['seats']);
-  // echo "<br>";
-  // echo "FOREACH STARTS HERE";
-  // echo "<br>";
-  // foreach ($_POST['seats'] as $class => $amount) {
-  //   $seatInt = is_numeric($amount) ? "True" : "False";
-  //   echo $seatInt;
-  //   echo "<br>";
-  // }
-  // echo "Array sum: ";
-  // echo array_sum($_POST['seats']);
-  // echo "<br>";
-  // $seatTotal = array_sum($_POST['seats']) > 0  ? "True" : "False";
-  // echo "Seat Total Greater than 0?? :";
-  // echo $seatTotal;
-  // echo "<br>";
 
   //Check there are seats chosen
   if (array_sum($_POST['seats']) < $minSeats) {
@@ -149,37 +123,47 @@ function findPostErrors()
   return $errors;
 }
 
-function validateBookingRequest()
-{
-  if (!empty($_POST)) {
-    // echo "STUFF FOUND IN POST \n";
-    // echo "<br>";
-    $requestErrors = findRequestErrors();
-    if (count($requestErrors) > 0) {
-      // echo "you have errors \n";
+// function validateBookingRequest()
+// {
+//   if (!empty($_POST)) {
+//     // echo "STUFF FOUND IN POST \n";
+//     // echo "<br>";
+//     $requestErrors = findRequestErrors();
+//      echo "printing request errrors below:\n";
+//     echo "<br>";
+//     print_r ($requestErrors);
+//     if (count($requestErrors) > 0) {
+//       echo "you have errors \n";
+//       echo $requestErrors['error'] . " \n";
+//       return $requestErrors;
+//     } else {
+//       // $_SESSION = $_POST;
+//       echo "you are free to go \n";
+//       // header("Location: currentbookings.php");
+//     }
+//   } else {
+//     echo "nothing zilch nada \n";
+//   }
+// }
 
-      return $requestErrors;
-    } else {
-      // $_SESSION = $_POST;
-      // echo "you are free to go \n";
-      header("Location: currentbookings.php");
-    }
-  } else {
-    // echo "no STUFFs FOUNDs IN the POST \n";
-  }
-}
-
-function findRequestErrors(){
-  global $currentBookings;
-  $requestErrors = [];
-  $postName = $_POST['user']['name'];
-  $postEmail = $_POST['user']['email'];
-    readFromBookingsFile();
-    foreach ($currentBookings as $booking) {
-      // if (($booking[1] == $_POST['name']) && ($booking[2] == $_POST['email'])) {
-      if ((!$booking[1] == $postName) && (!$booking[2] == $postEmail)) {
-        $requestErrors['error'] = "Sorry, we found no current bookings matching that name and email address";
-      }
-    }
-    return $requestErrors;
-}
+// function findRequestErrors()
+// {
+//   global $currentBookings;
+//   $requestErrors = [];
+//   $postName = $_POST['user']['name'];
+//   $postEmail = $_POST['user']['email'];
+//   $currentBookings = readFromBookingsFile();
+//   foreach ($currentBookings as $booking) {
+    
+//     // if (($booking[1] == $_POST['name']) && ($booking[2] == $_POST['email'])) {
+//     if (($booking[1] == $postName) && ($booking[2] == $postEmail)) {
+//       // $requestErrors['error'] = "Sorry, we found no current bookings matching that name and email address";
+//       echo "WE FOUND YOU\n";
+//       header("Location: currentbookings.php");
+//     }
+//     else {
+//       $requestErrors['error'] = "Sorry, we found no current bookings matching that name and email address";
+//     }
+//   }
+//   return $requestErrors;
+// }
